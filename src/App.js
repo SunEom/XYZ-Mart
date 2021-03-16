@@ -1,11 +1,15 @@
 import './App.css';
 import Header from './components/Header';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
+import Home from './screens/Home';
 function App() {
   return (
     <div className="App">
       <HashRouter>
         <Header />
+        <Route exact path="/">
+          <Home />
+        </Route>
       </HashRouter>
     </div>
   );
