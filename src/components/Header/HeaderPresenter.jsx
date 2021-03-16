@@ -69,9 +69,9 @@ const HeaderPresenter = () => {
           </form>
         </div>
 
-        <div className=" pl-14 ">
+        <div className="pl-14 ">
           <button type="submit" className="">
-            <i className="far fa-user fa-2x pr-5"></i>
+            <i className="far fa-user fa-2x pr-10"></i>
           </button>
           <button type="submit" className="">
             <i className="fas fa-shopping-bag fa-2x"></i>
@@ -97,22 +97,22 @@ const HeaderPresenter = () => {
           <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
             sale
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
             아트배송
           </Link>
         </div>
 
-        <div className="flex items-center pl-20">
+        <div className="flex items-center pl-20 ">
           <Link to="1" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
             #NUOVO
           </Link>
           <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
             best
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
             기획전
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
             이벤트/쿠폰
           </Link>
           <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
