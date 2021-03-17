@@ -1,10 +1,12 @@
 import React from 'react';
-import Swiper from '../../components/Swiper';
+import MainSwiper from '../../components/Swiper';
 
 const HomePresenter = () => {
   return (
-    <div>
-      <Swiper></Swiper>
+    <div className="w-full">
+      <div className="px-40">
+        <MainSwiper></MainSwiper>
+      </div>
     </div>
   );
 };
