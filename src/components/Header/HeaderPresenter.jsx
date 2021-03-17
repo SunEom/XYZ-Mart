@@ -38,10 +38,10 @@ const HeaderPresenter = () => {
 
       {/* Middle Part */}
       <div className="w-full justify-between py-1 whitespace-nowrap flex items-center box-border px-20 lg:px-52">
-        <div className=" px-5 py-10 text-3xl text-extrabold text-mainRed flex items-center box-sizing ">
+        <Link to="/" className=" px-5 py-10 text-3xl text-extrabold text-mainRed flex items-center box-sizing ">
           <span>XYZ</span>
           <span className="text-2xl">-MART</span>
-        </div>
+        </Link>
 
         <div className=" box-border flex justify-center px-56 font-noto">
           <select
