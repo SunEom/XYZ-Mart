@@ -4,7 +4,9 @@ import MainSwiper from '../../components/Swiper';
 const HomePresenter = () => {
   return (
     <div className="w-full">
-      <MainSwiper></MainSwiper>
+      <div className="px-40">
+        <MainSwiper></MainSwiper>
+      </div>
     </div>
   );
 };
