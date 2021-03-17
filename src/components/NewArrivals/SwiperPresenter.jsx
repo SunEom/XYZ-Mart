@@ -14,7 +14,7 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-export default () => {
+const NewArrivalsSwiper = () => {
   return (
     <div className="pt-24">
       <div className="relative">
@@ -116,3 +116,5 @@ export default () => {
     </div>
   );
 };
+
+export default NewArrivalsSwiper;
