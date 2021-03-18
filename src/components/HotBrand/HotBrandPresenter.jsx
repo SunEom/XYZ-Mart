@@ -29,9 +29,11 @@ const HotBrandPresenter = ({ bgImgList }) => {
             navigation
             onSwiper={(swiper) => console.log(swiper)}
             prev
-            onSlidePrevTransitionStart={() => setBgIndex((current) => current - 1)}
-            onSlideNextTransitionStart={() => setBgIndex((current) => current + 1)}
-            style={{ paddingLeft: 20, paddingRight: 20 }}
+            onSlidePrevTransitionStart={() => setBgIndex((current) => (current - 1 + bgImgList.length) % bgImgList.length)}
+            onSlideNextTransitionStart={() => setBgIndex((current) => (current + 1) % bgImgList.length)}
+            style={{ paddingLeft: 20, paddingRight: 20, width: 1500 }}
+            autoplay={true}
+            loop={true}
           >
             {/* Nike */}
             <SwiperSlide className="w-full">

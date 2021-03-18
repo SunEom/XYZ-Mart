@@ -23,7 +23,7 @@ const DetailPresenter = () => {
         <div className="flex">
           <div>
             <img
-              src="https://images.unsplash.com/photo-1542272604-78d13c1f741a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=580&h=580&q=80"
+              src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
               alt=""
             />
             <div className="mt-8 border-t-2 border-b border-solid flex items-center">
@@ -91,19 +91,19 @@ const DetailPresenter = () => {
                 <Link to="/1" className="mr-2">
                   <img
                     style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1542272604-78d13c1f741a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=580&h=580&q=80"
+                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
                 </Link>
                 <Link to="/1" className="mr-2">
                   <img
                     style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1542272604-78d13c1f741a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=580&h=580&q=80"
+                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
                 </Link>
                 <Link to="/1" className="mr-2">
                   <img
                     style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1542272604-78d13c1f741a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=580&h=580&q=80"
+                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
                 </Link>
               </div>
@@ -115,7 +115,7 @@ const DetailPresenter = () => {
                   통합맴버십 혜택
                 </div>
                 <div className="flex font-bold items-end h-20">
-                  맴버십 회원 가입 시 <span className="text-mainRed text-lg">5,000</span>P 즉시 적립
+                  맴버십 회원 가입 시 <span className="text-mainRed text-lg"> 5,000</span>P 즉시 적립
                 </div>
               </div>
               <div className="flex items-center mt-8">
@@ -124,7 +124,7 @@ const DetailPresenter = () => {
                 </div>
                 <div className="flex font-bold items-center">
                   <div>무이자 할부</div>
-                  <div className="font-normal text-sm ml-4 text-red-600 underline"> 혜택보기></div>
+                  <div className="font-normal text-sm ml-4 text-red-600 underline"> 혜택보기 ></div>
                 </div>
               </div>
               <div className="flex items-center pt-6">
@@ -210,12 +210,12 @@ const DetailPresenter = () => {
               </div>
               <div style={{ height: 95 }} className="flex items-center justify-between pr-4">
                 <button
-                  style={{ width: 285 }}
+                  style={{ width: 580 }}
                   className="ml-4 text-lg font-bold bg-gray-500 h-16 flex items-center justify-center text-white hover:bg-black transition-all duration-500"
                 >
                   장바구니
                 </button>
-                <button style={{ width: 285 }} className="ml-4 text-lg font-bold bg-black h-16 flex items-center justify-center text-white">
+                <button style={{ width: 580 }} className="ml-4 text-lg font-bold bg-black h-16 flex items-center justify-center text-white">
                   바로구매
                 </button>
               </div>
