@@ -9,7 +9,7 @@ const HomePresenter = () => {
       <div className="px-40">
         <MainSwiper></MainSwiper>
       </div>
-      <div className="w-full px-40">
+      <div className="w-full px-40 flex justify-center">
         <NewArrials></NewArrials>
       </div>
       <div className="w-full mt-20">
