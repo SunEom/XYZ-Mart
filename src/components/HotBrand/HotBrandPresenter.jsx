@@ -9,7 +9,7 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 
 const HotBrandPresenter = ({ bgImgList }) => {
-  const [bgIndex, setBgIndex] = useState(0);
+  const [bgIndex, setBgIndex] = useState(-1);
   console.log(bgImgList);
 
   return (
@@ -17,9 +17,9 @@ const HotBrandPresenter = ({ bgImgList }) => {
       <div className="uppercase text-center pt-24 pb-10 text-3xl font-bold">Hot Brand</div>
       <div className="relative">
         <div className="relative">
-          <img className="w-full" src={bgImgList[bgIndex].src} style={{ height: 360 }} alt="" />
+          <img className="w-full" src={bgImgList[bgIndex]?.src} style={{ height: 360 }} alt="" />
           <div className="absolute top-0 w-full bg-black bg-opacity-40 " style={{ height: 360 }}>
-            <div className="w-full text-white text-center pt-20 text-4xl font-bold">{bgImgList[bgIndex].com}</div>
+            <div className="w-full text-white text-center pt-20 text-4xl font-bold">{bgImgList[bgIndex]?.com}</div>
           </div>
         </div>
 
