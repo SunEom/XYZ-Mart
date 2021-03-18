@@ -15,10 +15,15 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
+var size = {
+  width: window.innerWidth || document.body.clientWidth,
+  height: window.innerHeight || document.body.clientHeight,
+};
+
 const EventSwiperPresenter = () => {
   return (
     <div>
-      <Swiper slidesPerView={5} navigation loop={true} autoplay={true} style={{ width: 2000 }}>
+      <Swiper slidesPerView={5} spaceBetween={10} navigation loop={true} autoplay={true} style={{ minWidth: 1700, maxWidth: 1900 }}>
         <SwiperSlide className="flex justify-center w-54">
           <EventItem
             img="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80"

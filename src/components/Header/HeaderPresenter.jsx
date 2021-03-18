@@ -6,8 +6,8 @@ const HeaderPresenter = () => {
     <header className="font-alfa w-full">
       {/* Top Part */}
       <div
-        className="flex justify-between py-1 px-52 whitespace-nowrap border-solid border-b border-gray-300"
-        style={{ height: 35, width: 1700 }}
+        className="flex justify-between py-1 px-52 whitespace-nowrap border-solid border-b border-gray-300 w-full"
+        style={{ height: 35, minWidth: 1700 }}
       >
         <div className="pr-80">
           <Link to="1" className="text-black px-5 text-lg font-bold border-solid border-r border-gray-300 ">
@@ -41,8 +41,8 @@ const HeaderPresenter = () => {
 
       {/* Middle Part */}
       <div
-        className="w-full justify-between py-1 whitespace-nowrap flex items-center box-border px-52"
-        style={{ height: 130, width: 1310 }}
+        className="w-full justify-between py-1 whitespace-nowrap flex items-center box-border px-52 "
+        style={{ height: 130, minWidth: 1310 }}
       >
         <Link to="/" className=" px-5 py-10 text-3xl text-extrabold text-mainRed flex items-center box-sizing ">
           <span>XYZ</span>
