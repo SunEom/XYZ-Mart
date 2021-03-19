@@ -1,5 +1,6 @@
 import './App.css';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import { HashRouter, Route } from 'react-router-dom';
 import Home from './screens/Home';
 import Detail from './screens/Detail';
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/product/:id">
           <Detail />
         </Route>
+        <Footer />
       </HashRouter>
     </div>
   );
