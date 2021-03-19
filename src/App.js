@@ -5,6 +5,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import Home from './screens/Home';
 import Detail from './screens/Detail';
 import Login from './screens/Login';
+import Join from './screens/Join';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/join">
+          <Join />
         </Route>
         <Route exact path="/product/:id">
           <Detail />
