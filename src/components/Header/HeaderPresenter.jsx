@@ -27,7 +27,7 @@ const HeaderPresenter = () => {
           <Link to="/login" className="px-2 text-xs text-bold">
             로그인
           </Link>
-          <Link to="1" className="px-2 text-xs text-bold">
+          <Link to="/join" className="px-2 text-xs text-bold">
             회원가입
           </Link>
           <Link to="1" className="px-2 text-xs text-bold">
