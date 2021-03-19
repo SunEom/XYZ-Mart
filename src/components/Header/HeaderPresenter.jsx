@@ -76,12 +76,12 @@ const HeaderPresenter = () => {
         </div>
 
         <div className="pl-14 ">
-          <button type="submit" className="">
+          <Link to="/profile" className="focus:outline-none">
             <i className="far fa-user fa-2x pr-10"></i>
-          </button>
-          <button type="submit" className="">
+          </Link>
+          <Link to="/cart" className="focus:outline-none">
             <i className="fas fa-shopping-bag fa-2x"></i>
-          </button>
+          </Link>
         </div>
       </div>
 

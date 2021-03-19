@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const ItemPresenter = ({ img, company, serial, cost, isNew, id }) => {
   return (
-    <Link to={`/${id}`} className="h-96 flex w-60 flex-col items-center relative left-4">
+    <Link to={`/product/${id}`} className="h-96 flex w-60 flex-col items-center relative left-4">
       <div>
         <img src={img} alt="" />
         <div className="h-20 flex flex-col justify-center ">
