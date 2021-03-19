@@ -15,11 +15,6 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-var size = {
-  width: window.innerWidth || document.body.clientWidth,
-  height: window.innerHeight || document.body.clientHeight,
-};
-
 const EventSwiperPresenter = () => {
   return (
     <div>
