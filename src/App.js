@@ -3,6 +3,7 @@ import Header from './components/Header';
 import { HashRouter, Route } from 'react-router-dom';
 import Home from './screens/Home';
 import Detail from './screens/Detail';
+import Login from './screens/Login';
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/:id">
+        <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/product/:id">
           <Detail />
         </Route>
       </HashRouter>

@@ -24,7 +24,7 @@ const HeaderPresenter = () => {
           </Link>
         </div>
         <div className="pl-80">
-          <Link to="1" className="px-2 text-xs text-bold">
+          <Link to="/login" className="px-2 text-xs text-bold">
             로그인
           </Link>
           <Link to="1" className="px-2 text-xs text-bold">
