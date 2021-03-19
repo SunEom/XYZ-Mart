@@ -90,18 +90,21 @@ const DetailPresenter = () => {
               <div className="flex">
                 <Link to="/1" className="mr-2">
                   <img
+                    alt=""
                     style={{ height: 50 }}
                     src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
                 </Link>
                 <Link to="/1" className="mr-2">
                   <img
+                    alt=""
                     style={{ height: 50 }}
                     src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
                 </Link>
                 <Link to="/1" className="mr-2">
                   <img
+                    alt=""
                     style={{ height: 50 }}
                     src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
                   />
