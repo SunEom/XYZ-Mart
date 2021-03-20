@@ -60,10 +60,10 @@ const DetailPresenter = () => {
               </div>
               <div className="flex items-center">
                 <div className="mr-5">
-                  <i class="fas fa-store-alt"></i> <span className="text-sm font-bold">매장픽업 가능</span>
+                  <i className="fas fa-store-alt"></i> <span className="text-sm font-bold">매장픽업 가능</span>
                 </div>
                 <div>
-                  <i class="far fa-heart fa-2x"></i>
+                  <i className="far fa-heart fa-2x"></i>
                 </div>
               </div>
             </div>
