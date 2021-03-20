@@ -6,6 +6,7 @@ import Home from './screens/Home';
 import Detail from './screens/Detail';
 import Login from './screens/Login';
 import Join from './screens/Join';
+import Cart from './screens/Cart';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route exact path="/join">
           <Join />
+        </Route>
+        <Route exact path="/cart">
+          <Cart />
         </Route>
         <Route exact path="/product/:id">
           <Detail />
