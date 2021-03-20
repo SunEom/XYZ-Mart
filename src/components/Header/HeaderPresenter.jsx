@@ -75,12 +75,15 @@ const HeaderPresenter = () => {
           </form>
         </div>
 
-        <div className="pl-14 ">
+        <div className="pl-14 relative">
           <Link to="/profile" className="focus:outline-none">
             <i className="far fa-user fa-2x pr-10"></i>
           </Link>
           <Link to="/cart" className="focus:outline-none">
             <i className="fas fa-shopping-bag fa-2x"></i>
+            <div className="h-4 w-4 bg-mainRed text-xs flex justify-center items-center text-white font-mont font-bold absolute -right-1 bottom-0">
+              1
+            </div>
           </Link>
         </div>
       </div>
