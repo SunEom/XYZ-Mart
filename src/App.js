@@ -7,6 +7,7 @@ import Detail from './screens/Detail';
 import Login from './screens/Login';
 import Join from './screens/Join';
 import Cart from './screens/Cart';
+import Search from './screens/Search';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route exact path="/cart">
           <Cart />
+        </Route>
+        <Route exact path="/search/:keyword">
+          <Search />
         </Route>
         <Route exact path="/product/:id">
           <Detail />
