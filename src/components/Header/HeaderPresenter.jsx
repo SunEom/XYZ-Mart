@@ -79,7 +79,7 @@ const HeaderPresenter = ({ onSearch }) => {
         </div>
 
         <div className="pl-14 relative">
-          <Link to="/profile" className="focus:outline-none">
+          <Link to="/mypage" className="focus:outline-none">
             <i className="far fa-user fa-2x pr-10"></i>
           </Link>
           <Link to="/cart" className="focus:outline-none">
