@@ -2,7 +2,7 @@ import React from 'react';
 
 const FooterPresenter = () => {
   return (
-    <div style={{ minWidth: 1700 }} className="w-full font-noto mt-20">
+    <div style={{ minWidth: 1700 }} className="w-full font-noto mt-20 -mb-20">
       {/* top part */}
       <div className="h-12 bg-gray-200 w-full flex justify-center items-center">
         <div style={{ width: 700 }} className="flex items-center">
