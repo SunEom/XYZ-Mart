@@ -76,6 +76,7 @@ const CartPresenter = () => {
                   <i className="fas fa-truck"></i> 무료배송
                 </div>
               </div>
+              {/* 상품내용 */}
               <div className="flex justify-between font-mont border-b border-solid border-gray-300">
                 <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
                   <input type="checkbox" style={{ transform: 'scale(1.3)' }} className="mr-7" />

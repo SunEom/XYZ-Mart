@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HeaderPresenter = () => {
+const HeaderPresenter = ({ onSearch }) => {
   return (
     <header className="font-alfa w-full">
       {/* Top Part */}
@@ -58,15 +58,18 @@ const HeaderPresenter = () => {
             <option className="py-1 font-noto">XYZ-MART</option>
             <option className="py-1 font-noto">GRAND STAGE</option>
           </select>
-          <form className="pt-2 text-black flex items-center mr-10 border-solid border-b-2 border-black focus-within:border">
+          <form
+            onSubmit={onSearch}
+            className="pt-2 text-black flex items-center mr-10 border-solid border-b-2 border-black focus-within:border"
+          >
             <input
               className=" placeholder-gray plcaeholder h-10 w-72 pl-3 pr-4 text-base focus:outline-none"
               type="text"
-              name="search"
+              name="keyword"
               placeholder="봄 신상 컬렉션★10% 할인★"
               autoComplete="off"
             />
-            <button type="submit" className="mr-3">
+            <button className="mr-3">
               <i className="fas fa-filter fa-lg"></i>
             </button>
             <button type="submit" className="">
@@ -76,7 +79,7 @@ const HeaderPresenter = () => {
         </div>
 
         <div className="pl-14 relative">
-          <Link to="/profile" className="focus:outline-none">
+          <Link to="/mypage" className="focus:outline-none">
             <i className="far fa-user fa-2x pr-10"></i>
           </Link>
           <Link to="/cart" className="focus:outline-none">
