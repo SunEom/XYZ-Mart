@@ -2,14 +2,16 @@ const express = require('express');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-
-const { sequelize } = require('../../models');
+const passport = require('passport');
+const passportConfig = require('./passport');
+const cookieParser = require('cookie-parser');
+const { sequelize } = require('./models');
 const AuthRouter = require('./routes/auth');
 
 dotenv.config();
 
 const app = express();
-
+passportConfig();
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -23,6 +25,20 @@ app.set('port', process.env.SERVER_PORT);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/auth', AuthRouter);
 
