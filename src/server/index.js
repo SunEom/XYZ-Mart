@@ -3,18 +3,40 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
 
+const { sequelize } = require('../../models');
+const AuthRouter = require('./routes/auth');
+
 dotenv.config();
 
 const app = express();
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('DB연결 성공');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+app.set('port', process.env.SERVER_PORT);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/hi', (req, res, next) => {
-  res.send('hello');
-});
-app.use('/hello', (req, res, next) => {
-  res.send('hello!!');
+app.use('/auth', AuthRouter);
+
+app.use((req, res, next) => {
+  const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+  error.status = 404;
+  next(error);
 });
 
-app.listen(8000, () => console.log(`Server listen ${process.env.SERVER_PORT} port`));
+app.use((err, req, res, next) => {
+  res.locals.message = err.message;
+  res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+app.listen(app.get('port'), () => console.log(`Server listen ${app.get('port')} port`));
