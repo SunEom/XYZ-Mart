@@ -7,8 +7,10 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -35,6 +37,7 @@
     "test": "craco test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://127.0.0.1:8000",
   "eslintConfig": {
     "extends": [
       "react-app",

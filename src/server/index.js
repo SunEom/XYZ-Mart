@@ -7,6 +7,8 @@ const passportConfig = require('./passport');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
 const AuthRouter = require('./routes/auth');
+const JoinRouter = require('./routes/join');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -25,6 +27,7 @@ app.set('port', process.env.SERVER_PORT);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -41,6 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', AuthRouter);
+app.use('/join', JoinRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
