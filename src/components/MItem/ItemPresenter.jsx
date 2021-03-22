@@ -4,7 +4,7 @@ const ItemPresenter = ({ img, company, serial, cost, isNew, id }) => {
   return (
     <div style={{ width: 285 }} className="font-mont">
       <Link to={`/product/${id}`}>
-        <div classname="w-full flex justify-center">
+        <div className="w-full flex justify-center">
           <img src={img} alt="" style={{ margin: 0 }} />
         </div>
         <div className="h-20 flex flex-col justify-center ">

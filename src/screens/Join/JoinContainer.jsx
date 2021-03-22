@@ -11,8 +11,7 @@ const JoinContainer = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [pnum, setPnum] = useState('');
-  const [availableId, setAvailableId] = useState(false);
-  const [availableEmail, setAvailableEmail] = useState(false);
+
   const history = useHistory();
 
   const props = { name, id, email, password, password2, pnum, emailHost };

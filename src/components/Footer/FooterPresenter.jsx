@@ -14,7 +14,7 @@ const FooterPresenter = () => {
           <div className="mr-5 text-sm">NOTICE</div>
           <div className="mr-3 text-sm">배송 지연 안내</div>
           <div>
-            <i class="fas fa-plus"></i>
+            <i className="fas fa-plus"></i>
           </div>
         </div>
       </div>
@@ -44,9 +44,9 @@ const FooterPresenter = () => {
               <div>social</div>
               <div className="text-xs pt-4 pb-1 flex">
                 <i className="fab fa-facebook-square fa-3x text-gray-500 mr-2"></i>
-                <i class="fab fa-instagram fa-3x text-gray-500 mr-2"></i>
-                <i class="fab fa-youtube fa-3x text-gray-500 mr-2"></i>
-                <i class="fab fa-twitter-square fa-3x text-gray-500 mr-2"></i>
+                <i className="fab fa-instagram fa-3x text-gray-500 mr-2"></i>
+                <i className="fab fa-youtube fa-3x text-gray-500 mr-2"></i>
+                <i className="fab fa-twitter-square fa-3x text-gray-500 mr-2"></i>
               </div>
             </div>
           </div>
