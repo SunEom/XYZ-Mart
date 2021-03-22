@@ -29,8 +29,6 @@ const NewArrivalsSwiper = () => {
           spaceBetween={50}
           slidesPerView={5}
           navigation
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
           style={{ paddingLeft: 50, paddingRight: 50 }}
           className="flex justify-center"
         >

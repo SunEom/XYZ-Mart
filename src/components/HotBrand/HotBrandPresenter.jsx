@@ -11,7 +11,6 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 
 const HotBrandPresenter = ({ bgImgList }) => {
   const [bgIndex, setBgIndex] = useState(-1);
-  console.log(bgImgList);
 
   return (
     <div className="w-full">
@@ -30,8 +29,6 @@ const HotBrandPresenter = ({ bgImgList }) => {
           <Swiper
             slidesPerView={1}
             navigation
-            onSwiper={(swiper) => console.log(swiper)}
-            prev
             onSlidePrevTransitionStart={() => setBgIndex((current) => (current - 1 + bgImgList.length) % bgImgList.length)}
             onSlideNextTransitionStart={() => setBgIndex((current) => (current + 1) % bgImgList.length)}
             style={{ paddingLeft: 20, paddingRight: 20, width: 1500 }}

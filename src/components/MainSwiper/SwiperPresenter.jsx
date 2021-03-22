@@ -13,16 +13,7 @@ SwiperCore.use([Navigation, Autoplay]);
 const mySwiper = () => {
   return (
     <div className="px-60 w-full flex justify-center" style={{ minWidth: 1250 }}>
-      <Swiper
-        slidesPerView={1}
-        navigation
-        noSwiping={true}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
-        loop={true}
-        autoplay={true}
-        style={{ minWidth: 1250 }}
-      >
+      <Swiper slidesPerView={1} navigation noSwiping={true} loop={true} autoplay={true} style={{ minWidth: 1250 }}>
         <SwiperSlide>
           <div className="flex justify-center">
             <img
