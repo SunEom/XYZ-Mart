@@ -20,7 +20,6 @@ const LoginContainer = () => {
     await axios
       .post(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { id, password }, { withCredentials: true })
       .then(async (result) => {
-        console.log(result);
         await store.dispatch({ type: 'LOGIN', user: { ...result.data } });
         history.push({ pathname: '/' });
       })

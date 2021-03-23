@@ -9,8 +9,19 @@ import Join from './screens/Join';
 import Cart from './screens/Cart';
 import Search from './screens/Search';
 import MyPage from './screens/MyPage';
+import axios from 'axios';
+import { useEffect } from 'react';
+import store from './store';
 
 function App() {
+  const loginCheck = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { withCredentials: true })
+      .then(async (result) => await store.dispatch({ type: 'LOGIN', user: { ...result.data } }));
+  };
+  useEffect(() => {
+    loginCheck();
+  }, []);
   return (
     <div className="App mb-40">
       <HashRouter>

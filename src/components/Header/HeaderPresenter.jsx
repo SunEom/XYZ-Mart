@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HeaderPresenter = ({ onSearch }) => {
+const HeaderPresenter = ({ onSearch, user, onClick, onLogout }) => {
   return (
     <header className="font-alfa w-full">
       {/* Top Part */}
@@ -24,12 +24,20 @@ const HeaderPresenter = ({ onSearch }) => {
           </Link>
         </div>
         <div className="pl-80">
-          <Link to="/login" className="px-2 text-xs text-bold">
-            로그인
-          </Link>
-          <Link to="/join" className="px-2 text-xs text-bold">
-            회원가입
-          </Link>
+          {user ? (
+            <form onSubmit={onLogout} className="px-2 text-xs text-bold inline">
+              <button type="submit"> 로그아웃</button>
+            </form>
+          ) : (
+            <>
+              <Link to="/login" className="px-2 text-xs text-bold">
+                로그인
+              </Link>
+              <Link to="/join" className="px-2 text-xs text-bold">
+                회원가입
+              </Link>
+            </>
+          )}
           <Link to="1" className="px-2 text-xs text-bold">
             고객센터
           </Link>

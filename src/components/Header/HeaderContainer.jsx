@@ -1,13 +1,23 @@
-import React from 'react';
 import HeaderPresenter from './HeaderPresenter';
-import { useHistory } from 'react-router';
-const HeaderContainer = () => {
-  const history = useHistory();
-  const onSearch = (e) => {
-    e.preventDefault();
-    history.push(`/search/${e.target.keyword.value}`);
+import { connect } from 'react-redux';
+import axios from 'axios';
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogout: async (e) => {
+      e.preventDefault();
+      await axios
+        .get(`${process.env.REACT_APP_SERVER_PATH}/auth/logout`, { withCredentials: true })
+        .then((result) => {
+          dispatch({ type: 'LOGOUT' });
+        })
+        .catch((err) => console.error(err));
+    },
   };
-  return <HeaderPresenter onSearch={onSearch} />;
 };
 
-export default HeaderContainer;
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderPresenter);
