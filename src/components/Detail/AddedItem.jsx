@@ -12,7 +12,7 @@ const AddedItem = ({ size, number, cost, sale, onCancel }) => {
           {number}개
         </div>
         <div className="flex justify-end" style={{ width: 200 }}>
-          <div>{new Intl.NumberFormat().format(cost * sale * number)}원</div>
+          <div>{new Intl.NumberFormat().format(cost * (1 - sale) * number)}원</div>
           <button
             className="border border-solid border-black w-5 h-5 flex justify-center items-center ml-1"
             onClick={onCancel}

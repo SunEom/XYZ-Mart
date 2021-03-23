@@ -106,8 +106,8 @@ const DetailPresenter = ({ product, loading }) => {
               <div className="pt-5 text-mainRed">
                 <div className="inline line-through text-gray-600 text-lg">{new Intl.NumberFormat().format(product.cost)}원</div>
                 <div className="inline ml-3">
-                  <span className="text-3xl font-bold">{new Intl.NumberFormat().format(product.cost * product.sale)}</span>원[
-                  {product.sale * 100}%]
+                  <span className="text-3xl font-bold">{new Intl.NumberFormat().format(product.cost * (1 - product.sale))}</span>원[
+                  {(1 - product.sale) * 100}%]
                 </div>
               </div>
             </div>
@@ -226,7 +226,9 @@ const DetailPresenter = ({ product, loading }) => {
                   총 결제금액
                 </div>
                 <div className="flex items-end">
-                  <div className="text-mainRed mr-5 text-3xl font-bold">{new Intl.NumberFormat().format(totalCost * product.sale)}</div>
+                  <div className="text-mainRed mr-5 text-3xl font-bold">
+                    {new Intl.NumberFormat().format(totalCost * (1 - product.sale))}
+                  </div>
                   <div>원</div>
                 </div>
               </div>
