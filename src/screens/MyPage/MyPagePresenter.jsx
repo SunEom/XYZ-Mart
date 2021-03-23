@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const MyPagePresenter = () => {
+const MyPagePresenter = ({ user }) => {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
@@ -21,15 +21,15 @@ const MyPagePresenter = () => {
                 <i className="far fa-user text-8xl"></i>
                 <div className="ml-7 font-mont">
                   <div className="mb-3 text-xl">
-                    사용자님은 <span className="font-bold">통합맴버십 회원</span> 입니다.
+                    {user?.name}님은 <span className="font-bold">통합맴버십 회원</span> 입니다.
                   </div>
                   <div>
                     <span className="uppercase mr-3 font-bold mb-1">membership</span>
-                    <span className="uppercase font-bold text-gray-500">321134842839492</span>
+                    <span className="uppercase font-bold text-gray-500">{user?.membership}</span>
                   </div>
                   <div>
                     <span className="mr-3 font-bold">맴버십 회원 가입일</span>
-                    <span className="font-bold text-gray-500">2021.03.21</span>
+                    <span className="font-bold text-gray-500">{user?.created_at?.slice(0, 10)}</span>
                   </div>
                 </div>
               </div>
@@ -40,7 +40,7 @@ const MyPagePresenter = () => {
                     <div>나의 쿠폰</div>
                   </div>
                   <div className="text-right mr-5">
-                    <span className="text-xl font-bold font-mont">1</span>
+                    <span className="text-xl font-bold font-mont">0</span>
                     <span className="font-bold">개</span>
                   </div>
                 </div>
@@ -55,7 +55,7 @@ const MyPagePresenter = () => {
                     <div>나의 포인트</div>
                   </div>
                   <div className="text-right mr-5">
-                    <span className="text-xl font-bold font-mont">0</span>
+                    <span className="text-xl font-bold font-mont">{user?.point}</span>
                     <span className="font-bold">P</span>
                   </div>
                 </div>

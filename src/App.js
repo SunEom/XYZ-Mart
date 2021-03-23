@@ -17,7 +17,7 @@ function App() {
   const loginCheck = async () => {
     await axios
       .get(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { withCredentials: true })
-      .then(async (result) => await store.dispatch({ type: 'LOGIN', user: { ...result.data } }));
+      .then(async (result) => await store.dispatch({ type: 'LOGIN', user: result.data.dataValues }));
   };
   useEffect(() => {
     loginCheck();
