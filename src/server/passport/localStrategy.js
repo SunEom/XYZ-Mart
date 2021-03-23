@@ -2,18 +2,18 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const User = require('../models');
+const User = require('../models/user');
 
 module.exports = () => {
   passport.use(
     new LocalStrategy(
       {
-        usernameField: 'email',
+        usernameField: 'id',
         passwordField: 'password',
       },
-      async (email, password, done) => {
+      async (id, password, done) => {
         try {
-          const exUser = await User.findOne({ where: { email } });
+          const exUser = await User.findOne({ where: { user_id: id } });
           if (exUser) {
             const result = await bcrypt.compare(password, exUser.password);
             if (result) {
@@ -25,8 +25,8 @@ module.exports = () => {
             done(null, false, { message: '가입되지 않은 회원입니다.' });
           }
         } catch (error) {
-          console.error(err);
-          next(err);
+          console.error(error);
+          next(error);
         }
       }
     )
