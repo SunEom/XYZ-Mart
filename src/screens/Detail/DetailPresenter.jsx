@@ -35,7 +35,7 @@ const DetailPresenter = ({ product, loading }) => {
     setItem(temp);
     setTotalCost(cost);
   };
-  return loading ? null : (
+  return loading ? null : product.name ? (
     <div style={{ minWidth: 1700 }} className="flex justify-center">
       <div>
         <div className="flex items-center font-bold h-14 text-gray-500 mb-5 mt-2">
@@ -245,6 +245,16 @@ const DetailPresenter = ({ product, loading }) => {
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div
+      style={{ minWidth: 1700, height: 600 }}
+      className="flex flex-col justify-center items-center text-2xl text-gray-500 font-bold font-mont"
+    >
+      <div>
+        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+      </div>
+      <div>요청하신 물품을 찾을 수 없습니다.</div>
     </div>
   );
 };
