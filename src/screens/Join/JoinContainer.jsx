@@ -65,10 +65,15 @@ const JoinContainer = () => {
     await axios
       .post(`${process.env.REACT_APP_SERVER_PATH}/join`, { name, id, password, email, pnum })
       .then(async () => {
-        alert('회원가입을 축하드립니다!');
-        history.push({
-          pathname: '/',
-        });
+        await alert('회원가입을 축하드립니다!');
+        axios
+          .post(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { id, password }, { withCredentials: true })
+          .then(async (result) => {
+            await store.dispatch({ type: 'LOGIN', user: { ...result.data } });
+            history.push({ pathname: '/' });
+            window.scrollTo(0, 0);
+          })
+          .catch((err) => console.error(err.response));
       })
       .catch((err) => console.error(err));
   };
