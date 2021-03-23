@@ -5,11 +5,15 @@ module.exports = class Product extends Seqeulize.Model {
   static init(sequelize) {
     return super.init(
       {
+        name: {
+          type: Sequelize.STRING(45),
+          allowNull: false,
+        },
         serial: {
           type: Sequelize.STRING(20),
           allowNull: false,
         },
-        company: {
+        brand: {
           type: Seqeulize.STRING(20),
           allowNull: false,
         },
@@ -23,6 +27,22 @@ module.exports = class Product extends Seqeulize.Model {
         },
         img: {
           type: Sequelize.STRING(300),
+          allowNull: false,
+        },
+        type: {
+          type: Sequelize.STRING(20),
+          allowNull: false,
+        },
+        code: {
+          type: Sequelize.STRING(8),
+          allowNull: false,
+        },
+        stylecode: {
+          type: Sequelize.STRING(8),
+          allowNull: false,
+        },
+        sale: {
+          type: Sequelize.FLOAT,
           allowNull: false,
         },
         created_at: {
