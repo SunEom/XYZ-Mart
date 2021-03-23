@@ -1,10 +1,41 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddedItem from '../../components/Detail/AddedItem';
 
-const DetailPresenter = () => {
-  const [cost, setCost] = useState(0);
-  const addCost = () => setCost((current) => current + 48000);
-  return (
+const DetailPresenter = ({ product, loading }) => {
+  const [totalCost, setTotalCost] = useState(0);
+  const [item, setItem] = useState([]);
+  const onClick = (e) => {
+    addCost();
+    addItem(e);
+  };
+  const isInArray = (arr, size) => {
+    for (let i = 0; i < arr.length; i++) if (arr[i].size === size) return i;
+    return -1;
+  };
+  const addCost = () => setTotalCost((current) => current + product.cost);
+  const addItem = (e) => {
+    let index = isInArray(item, e.target.innerHTML);
+    if (index !== -1) {
+      let temp = [...item];
+      temp[index].number++;
+      setItem(temp);
+    } else {
+      let temp = [...item];
+      temp.push({ size: e.target.innerHTML, number: 1 });
+      setItem(temp);
+    }
+  };
+  const onCancel = (e) => {
+    let temp = [...item].filter((i) => i.size !== e.target.querySelector('input').value);
+    let cost = 0;
+    for (let i = 0; i < temp.length; i++) {
+      cost += temp[i].number * product.cost;
+    }
+    setItem(temp);
+    setTotalCost(cost);
+  };
+  return loading ? null : product.name ? (
     <div style={{ minWidth: 1700 }} className="flex justify-center">
       <div>
         <div className="flex items-center font-bold h-14 text-gray-500 mb-5 mt-2">
@@ -22,10 +53,7 @@ const DetailPresenter = () => {
         </div>
         <div className="flex">
           <div>
-            <img
-              src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
-              alt=""
-            />
+            <img src={`${product.img}&w=580&h=580&q=80`} alt="" />
             <div className="mt-8 border-t-2 border-b border-solid flex items-center">
               <div style={{ width: 290 }} className="text-center py-8">
                 <div className="font-bold text-gray-500">상품만족도</div>
@@ -53,32 +81,33 @@ const DetailPresenter = () => {
               <div className="flex">
                 <div className="bg-mainRed px-2 text-white font-bold text-base mr-2 flex items-center h-7">XYZ-MART</div>
                 <div className="font-bold border-b border-solid relative -top-2">
-                  <Link to="/shoes/newbalance" className="relative top-2">
-                    뉴발란스 <i className="fas fa-chevron-right"></i>
+                  <Link to={`/shoes/brand/${product.brand?.toLowerCase()}`} className="relative top-2">
+                    {product.brand} <i className="fas fa-chevron-right"></i>
                   </Link>
                 </div>
               </div>
               <div className="flex items-center">
                 <div className="mr-5">
-                  <i class="fas fa-store-alt"></i> <span className="text-sm font-bold">매장픽업 가능</span>
+                  <i className="fas fa-store-alt"></i> <span className="text-sm font-bold">매장픽업 가능</span>
                 </div>
                 <div>
-                  <i class="far fa-heart fa-2x"></i>
+                  <i className="far fa-heart fa-2x"></i>
                 </div>
               </div>
             </div>
 
             <div className="border-b-2 border-solid py-5">
-              <div className="text-3xl font-bold">클럽 씨 리벤지</div>
-              <div className="uppercase text-gray-500 py-2">club c revenge</div>
+              <div className="text-3xl font-bold">{product.name}</div>
+              <div className="uppercase text-gray-500 py-2">{product.serial}</div>
               <div className="flex text-sm text-gray-500">
-                <div className=" border-r border-solid pr-3 mr-3">스타일코드 : RASDFSBZ</div>
-                <div>상품코드 : R123123Z</div>
+                <div className=" border-r border-solid pr-3 mr-3 uppercase">스타일코드 : {product.stylecode}</div>
+                <div className="uppercase">상품코드 : {product.code}</div>
               </div>
               <div className="pt-5 text-mainRed">
-                <div className="inline line-through text-gray-600 text-lg">89,000원</div>
+                <div className="inline line-through text-gray-600 text-lg">{new Intl.NumberFormat().format(product.cost)}원</div>
                 <div className="inline ml-3">
-                  <span className="text-3xl font-bold">48,000</span>원[50%]
+                  <span className="text-3xl font-bold">{new Intl.NumberFormat().format(product.cost * (1 - product.sale))}</span>원[
+                  {(1 - product.sale) * 100}%]
                 </div>
               </div>
             </div>
@@ -88,27 +117,15 @@ const DetailPresenter = () => {
                 스타일 컬러
               </div>
               <div className="flex">
-                <Link to="/1" className="mr-2">
-                  <img
-                    alt=""
-                    style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
-                  />
-                </Link>
-                <Link to="/1" className="mr-2">
-                  <img
-                    alt=""
-                    style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
-                  />
-                </Link>
-                <Link to="/1" className="mr-2">
-                  <img
-                    alt=""
-                    style={{ height: 50 }}
-                    src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=580&h=580&q=80"
-                  />
-                </Link>
+                <div className="mr-2">
+                  <img alt="" style={{ height: 50 }} src={`${product.img}&w=580&h=580&q=80`} />
+                </div>
+                <div className="mr-2">
+                  <img alt="" style={{ height: 50 }} src={`${product.img}&w=580&h=580&q=80`} />
+                </div>
+                <div className="mr-2">
+                  <img alt="" style={{ height: 50 }} src={`${product.img}&w=580&h=580&q=80`} />
+                </div>
               </div>
             </div>
 
@@ -134,7 +151,7 @@ const DetailPresenter = () => {
                 <div style={{ width: 200 }} className="ml-4 font-bold">
                   색상 코드
                 </div>
-                <div className="flex text-sm uppercase">pocel/utigrn/vecnav</div>
+                <div className="flex text-sm uppercase">{product.color}</div>
               </div>
               <div className="flex items-center pt-8 pb-4">
                 <div style={{ width: 200 }} className="ml-4 font-bold relative -top-7">
@@ -143,12 +160,12 @@ const DetailPresenter = () => {
                 <div className="flex text-sm uppercase flex-col ">
                   <div className="text-base mb-3">
                     <input type="radio" id="nomal" name="drone" value="nomal" checked className="mr-2" />
-                    <label for="nomal">일반배송 (무료배송)</label>
+                    <label htmlFor="nomal">일반배송 (무료배송)</label>
                   </div>
 
                   <div className="text-base">
                     <input type="radio" id="ati" name="drone" value="ati" className="mr-2" />
-                    <label for="ati">
+                    <label htmlFor="ati">
                       아트배송<div className="text-sm text-gray-400">(배송비 3,500원)</div>
                     </label>
                   </div>
@@ -160,54 +177,58 @@ const DetailPresenter = () => {
                 </div>
                 <div className="flex text-sm uppercase flex-col ">
                   <div>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       225
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       230
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       235
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       240
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       245
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       250
                     </button>
                   </div>
                   <div className="py-1">
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       255
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       260
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       265
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       270
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       275
                     </button>
-                    <button onClick={addCost} className="border border-solid px-3 mr-1">
+                    <button onClick={onClick} className="border border-solid px-3 mr-1">
                       280
                     </button>
                   </div>
                 </div>
               </div>
-
+              {item.map((i) => (
+                <AddedItem size={i.size} number={i.number} cost={product.cost} sale={product.sale} onCancel={onCancel} />
+              ))}
               <div style={{ height: 95 }} className="flex items-center justify-between pr-4">
                 <div style={{ width: 200 }} className="ml-4 text-sm font-bold">
                   총 결제금액
                 </div>
                 <div className="flex items-end">
-                  <div className="text-mainRed mr-5 text-3xl font-bold">{cost === 0 ? 0 : `${cost / 1000},000`}</div>
+                  <div className="text-mainRed mr-5 text-3xl font-bold">
+                    {new Intl.NumberFormat().format(totalCost * (1 - product.sale))}
+                  </div>
                   <div>원</div>
                 </div>
               </div>
@@ -226,6 +247,16 @@ const DetailPresenter = () => {
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div
+      style={{ minWidth: 1700, height: 600 }}
+      className="flex flex-col justify-center items-center text-2xl text-gray-500 font-bold font-mont"
+    >
+      <div>
+        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+      </div>
+      <div>요청하신 물품을 찾을 수 없습니다.</div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import MItem from '../../components/MItem';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,7 +11,6 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 
 const HotBrandPresenter = ({ bgImgList }) => {
   const [bgIndex, setBgIndex] = useState(-1);
-  console.log(bgImgList);
 
   return (
     <div className="w-full">
@@ -19,7 +19,9 @@ const HotBrandPresenter = ({ bgImgList }) => {
         <div className="relative">
           <img className="w-full" src={bgImgList[bgIndex]?.src} style={{ height: 360 }} alt="" />
           <div className="absolute top-0 w-full bg-black bg-opacity-40 " style={{ height: 360 }}>
-            <div className="w-full text-white text-center pt-20 text-4xl font-bold">{bgImgList[bgIndex]?.com}</div>
+            <div className="w-full text-white text-center pt-20 text-4xl font-bold">
+              <Link to={`/product/brand/${bgImgList[bgIndex]?.com}`.toLowerCase()}>{bgImgList[bgIndex]?.com}</Link>
+            </div>
           </div>
         </div>
 
@@ -27,8 +29,6 @@ const HotBrandPresenter = ({ bgImgList }) => {
           <Swiper
             slidesPerView={1}
             navigation
-            onSwiper={(swiper) => console.log(swiper)}
-            prev
             onSlidePrevTransitionStart={() => setBgIndex((current) => (current - 1 + bgImgList.length) % bgImgList.length)}
             onSlideNextTransitionStart={() => setBgIndex((current) => (current + 1) % bgImgList.length)}
             style={{ paddingLeft: 20, paddingRight: 20, width: 1500 }}

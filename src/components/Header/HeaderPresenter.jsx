@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HeaderPresenter = () => {
+const HeaderPresenter = ({ onSearch, user, onClick, onLogout }) => {
   return (
     <header className="font-alfa w-full">
       {/* Top Part */}
@@ -24,12 +24,20 @@ const HeaderPresenter = () => {
           </Link>
         </div>
         <div className="pl-80">
-          <Link to="1" className="px-2 text-xs text-bold">
-            로그인
-          </Link>
-          <Link to="1" className="px-2 text-xs text-bold">
-            회원가입
-          </Link>
+          {user ? (
+            <form onSubmit={onLogout} className="px-2 text-xs text-bold inline">
+              <button type="submit"> 로그아웃</button>
+            </form>
+          ) : (
+            <>
+              <Link to="/login" className="px-2 text-xs text-bold">
+                로그인
+              </Link>
+              <Link to="/join" className="px-2 text-xs text-bold">
+                회원가입
+              </Link>
+            </>
+          )}
           <Link to="1" className="px-2 text-xs text-bold">
             고객센터
           </Link>
@@ -58,15 +66,18 @@ const HeaderPresenter = () => {
             <option className="py-1 font-noto">XYZ-MART</option>
             <option className="py-1 font-noto">GRAND STAGE</option>
           </select>
-          <form className="pt-2 text-black flex items-center mr-10 border-solid border-b-2 border-black focus-within:border">
+          <form
+            onSubmit={onSearch}
+            className="pt-2 text-black flex items-center mr-10 border-solid border-b-2 border-black focus-within:border"
+          >
             <input
               className=" placeholder-gray plcaeholder h-10 w-72 pl-3 pr-4 text-base focus:outline-none"
               type="text"
-              name="search"
+              name="keyword"
               placeholder="봄 신상 컬렉션★10% 할인★"
               autoComplete="off"
             />
-            <button type="submit" className="mr-3">
+            <button className="mr-3">
               <i className="fas fa-filter fa-lg"></i>
             </button>
             <button type="submit" className="">
@@ -75,13 +86,16 @@ const HeaderPresenter = () => {
           </form>
         </div>
 
-        <div className="pl-14 ">
-          <button type="submit" className="">
+        <div className="pl-14 relative">
+          <Link to="/mypage" className="focus:outline-none">
             <i className="far fa-user fa-2x pr-10"></i>
-          </button>
-          <button type="submit" className="">
+          </Link>
+          <Link to="/cart" className="focus:outline-none">
             <i className="fas fa-shopping-bag fa-2x"></i>
-          </button>
+            <div className="h-4 w-4 bg-mainRed text-xs flex justify-center items-center text-white font-mont font-bold absolute -right-1 bottom-0">
+              1
+            </div>
+          </Link>
         </div>
       </div>
 
