@@ -15,7 +15,7 @@ const LoginPresenter = ({ id, password, onChange, onSubmit }) => {
               type="text"
               name="id"
               className="border-b border-solid border-gray-300 w-full mt-16 pb-3 focus:outline-none pl-8 placeholder-gray-500 text-sm text-bold font-noto"
-              autoComplete={false}
+              autoComplete="off"
               value={id}
               onChange={onChange}
               placeholder="아이디를 입력해주세요."
@@ -27,12 +27,12 @@ const LoginPresenter = ({ id, password, onChange, onSubmit }) => {
               type="password"
               name="password"
               className="border-b border-solid border-gray-300 w-full mt-2 pb-3 focus:outline-none pl-8 placeholder-gray-500 text-sm text-bold font-noto"
-              autoComplete={false}
+              autoComplete="off"
               value={password}
               onChange={onChange}
               placeholder="비밀번호를 입력해 주세요."
             />
-            <i class="fas fa-lock  relative bottom-9 fa-md left-1"></i>
+            <i className="fas fa-lock  relative bottom-9 fa-md left-1"></i>
           </div>
           <div className="m-3 -mt-1 mb-8">
             <input type="checkbox" id="idCheckBox" style={{ transform: 'scale(1.5)', marginRight: 10 }} />
@@ -70,7 +70,7 @@ const LoginPresenter = ({ id, password, onChange, onSubmit }) => {
           </div>
           <div className="px-2 text-sm font-bold py-6">
             <Link to="#" className="border-l border-solid border-gray-300 pl-3">
-              <i class="fas fa-comment mr-3"></i>카카오 아이디로 로그인
+              <i className="fas fa-comment mr-3"></i>카카오 아이디로 로그인
             </Link>
           </div>
         </div>
