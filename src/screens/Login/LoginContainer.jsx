@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginPresenter from './LoginPresenter';
 import axios from 'axios';
 import store from '../../store';
@@ -14,6 +14,14 @@ const LoginContainer = () => {
       setPassword(e.target.value);
     }
   };
+
+  useEffect(() => {
+    if (store.getState().user) {
+      history.push({
+        pathname: '/',
+      });
+    }
+  }, [history]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

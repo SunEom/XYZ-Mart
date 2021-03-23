@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import JoinPresenter from './JoinPresenter';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import store from '../../store';
 
 const JoinContainer = () => {
   const [name, setName] = useState('');
@@ -13,6 +14,13 @@ const JoinContainer = () => {
   const [pnum, setPnum] = useState('');
 
   const history = useHistory();
+  useEffect(() => {
+    if (store.getState().user) {
+      history.push({
+        pathname: '/',
+      });
+    }
+  }, [history]);
 
   const props = { name, id, email, password, password2, pnum, emailHost };
 
