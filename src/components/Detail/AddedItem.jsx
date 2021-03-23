@@ -2,7 +2,10 @@ import React from 'react';
 
 const AddedItem = ({ size, number, cost, sale, onCancel }) => {
   return (
-    <div className="flex items-center justify-between pt-6 border-b border-t border-gray-400 border-solid pb-7 px-4 font-mont">
+    <div
+      className="flex items-center justify-between pt-6 border-b border-gray-400 border-solid pb-7 px-4 font-mont"
+      style={{ backgroundColor: '#F8F8F8' }}
+    >
       <div className="text-sm">{size}</div>
       <div className="text-base font-bold flex items-center">
         <div className="font-normal text-xs text-center" style={{ width: 100 }}>
