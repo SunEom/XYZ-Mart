@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
 const AuthRouter = require('./routes/auth');
 const JoinRouter = require('./routes/join');
+const ProductRouter = require('./routes/product');
 const cors = require('cors');
 
 dotenv.config();
@@ -45,6 +46,7 @@ app.use(passport.session());
 
 app.use('/auth', AuthRouter);
 app.use('/join', JoinRouter);
+app.use('/product', ProductRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
