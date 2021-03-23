@@ -1,6 +1,6 @@
 const passport = require('passport');
 const local = require('./localStrategy');
-const User = require('../models');
+const User = require('../models/user');
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
@@ -9,7 +9,7 @@ module.exports = () => {
 
   passport.deserializeUser((id, done) => {
     User.findOne({
-      where: { id },
+      where: { user_id: id },
     })
       .then((user) => done(null, user))
       .catch((err) => done(err));

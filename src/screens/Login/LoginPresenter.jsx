@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const LoginPresenter = () => {
+const LoginPresenter = ({ id, password, onChange, onSubmit }) => {
   return (
     <div style={{ minWidth: 1700, height: 820 }} className="flex flex-col justify-center items-center font-noto">
       <div className="text-3xl font-bold pb-8">로그인</div>
       <div>
-        <form>
+        <form onSubmit={onSubmit}>
           <div>
             <button className="border border-solid border-gray-300 py-4 px-28">회원 로그인</button>
             <button className="border border-solid border-gray-300 py-4 px-28">비회원 주문조회</button>
@@ -13,8 +13,11 @@ const LoginPresenter = () => {
           <div>
             <input
               type="text"
+              name="id"
               className="border-b border-solid border-gray-300 w-full mt-16 pb-3 focus:outline-none pl-8 placeholder-gray-500 text-sm text-bold font-noto"
               autoComplete={false}
+              value={id}
+              onChange={onChange}
               placeholder="아이디를 입력해주세요."
             />
             <i className="far fa-user relative bottom-9 fa-md left-1"></i>
@@ -22,8 +25,11 @@ const LoginPresenter = () => {
           <div>
             <input
               type="password"
+              name="password"
               className="border-b border-solid border-gray-300 w-full mt-2 pb-3 focus:outline-none pl-8 placeholder-gray-500 text-sm text-bold font-noto"
               autoComplete={false}
+              value={password}
+              onChange={onChange}
               placeholder="비밀번호를 입력해 주세요."
             />
             <i class="fas fa-lock  relative bottom-9 fa-md left-1"></i>
