@@ -1,7 +1,6 @@
 import HeaderPresenter from './HeaderPresenter';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogout: async (e) => {
