@@ -33,7 +33,17 @@ router.post('/', async (req, res, next) => {
   const { name, password, email } = req.body;
   const hash = await bcrypt.hash(password, 12);
   try {
-    await User.create({ user_id, phoneNumber, name, password: hash, email, membership: randomString.generate(15) });
+    await User.create({
+      user_id,
+      phoneNumber,
+      name,
+      password: hash,
+      email,
+      membership: randomString.generate({
+        length: 15,
+        charset: 'numeric',
+      }),
+    });
     res.status(200).send({ message: 'Join success!' });
   } catch (err) {
     console.error(err);

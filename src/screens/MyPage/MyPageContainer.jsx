@@ -8,7 +8,7 @@ const MyPageContainer = () => {
   if (!user) {
     history.push({ pathname: '/' });
   }
-  return <MyPagePresenter />;
+  return <MyPagePresenter user={user} />;
 };
 
 export default MyPageContainer;
