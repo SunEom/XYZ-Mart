@@ -22,4 +22,19 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+router.get('/login', (req, res, next) => {
+  if (req.user) {
+    res.status(200).send({ ...req.user });
+  } else {
+    res.status(400).send({ message: 'not login' });
+  }
+});
+
+router.get('/logout', function (req, res, next) {
+  req.logout();
+  req.session.save(function () {
+    res.status(200).send({ code: 200 });
+  });
+});
+
 module.exports = router;
