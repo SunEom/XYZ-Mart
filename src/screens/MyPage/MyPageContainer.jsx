@@ -6,7 +6,7 @@ const MyPageContainer = () => {
   const history = useHistory();
   const user = store.getState().user;
   if (!user) {
-    history.push({ pathname: '/' });
+    history.push({ pathname: '/login' });
   }
   return <MyPagePresenter user={user} />;
 };
