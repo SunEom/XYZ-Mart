@@ -26,6 +26,15 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(20),
           allowNull: false,
         },
+        membership: {
+          type: Sequelize.STRING(15),
+          allowNull: false,
+        },
+        point: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
