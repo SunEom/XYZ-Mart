@@ -25,6 +25,10 @@ module.exports = class Product extends Seqeulize.Model {
           type: Sequelize.STRING(20),
           allowNull: false,
         },
+        brand_kor: {
+          type: Sequelize.STRING(45),
+          allowNull: false,
+        },
         img: {
           type: Sequelize.STRING(300),
           allowNull: false,
