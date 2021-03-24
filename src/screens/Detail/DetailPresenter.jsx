@@ -96,10 +96,10 @@ const DetailPresenter = ({ product, loading }) => {
               </div>
             </div>
 
-            <div className="border-b-2 border-solid py-5">
+            <div className="border-b-2 border-solid pb-5 pt-2">
               <div className="text-3xl font-bold">{product.name}</div>
               <div className="uppercase text-gray-500 py-2">{product.serial}</div>
-              <div className="flex text-sm text-gray-500">
+              <div className="flex text-xs font-bold text-gray-500">
                 <div className=" border-r border-solid pr-3 mr-3 uppercase">스타일코드 : {product.stylecode}</div>
                 <div className="uppercase">상품코드 : {product.code}</div>
               </div>
@@ -107,7 +107,7 @@ const DetailPresenter = ({ product, loading }) => {
                 <div className="inline line-through text-gray-600 text-lg">{new Intl.NumberFormat().format(product.cost)}원</div>
                 <div className="inline ml-3">
                   <span className="text-3xl font-bold">{new Intl.NumberFormat().format(product.cost * (1 - product.sale))}</span>원[
-                  {(1 - product.sale) * 100}%]
+                  {product.sale * 100}%]
                 </div>
               </div>
             </div>
