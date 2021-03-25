@@ -1,5 +1,5 @@
 const express = require('express');
-
+const Op = require('sequelize').Op;
 const router = express.Router();
 
 const Product = require('../models/product');
@@ -15,13 +15,23 @@ router.get('/brand/:brandname', async (req, res, next) => {
 });
 
 router.get('/category/:categoryname', async (req, res, next) => {
-  let searchFor = [`%${req.parms.categoryname}%`];
+  let searchFor = [`%${req.params.categoryname}%`];
+
+  // basically turning the items into objects with "$iLike" as the key
+  searchFor = searchFor.map((item) => {
+    return { $iLike: item };
+  });
   const products = await Product.findAll({
     where: {
-      $or: [{ brand_kor: { $or: searchFor } }, { brand: { $or: searchFor } }, { type: { $or: searchFor } }],
+      [Op.or]: [
+        { brand_kor: { [Op.like]: `%${req.params.categoryname}%` } },
+        { brand: { [Op.like]: `%${req.params.categoryname}%` } },
+        { type: { [Op.like]: `%${req.params.categoryname}%` } },
+      ],
     },
     order: [['created_at', 'DESC']],
   });
+
   res.send(products);
 });
 

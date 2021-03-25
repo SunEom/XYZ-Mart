@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HeaderPresenter = ({ onSearch, user, onClick, onLogout }) => {
+const HeaderPresenter = ({ onSearch, user, onLogout }) => {
   return (
     <header className="font-alfa w-full">
       {/* Top Part */}
