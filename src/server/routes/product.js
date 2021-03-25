@@ -14,6 +14,17 @@ router.get('/brand/:brandname', async (req, res, next) => {
   res.send(products);
 });
 
+router.get('/category/:categoryname', async (req, res, next) => {
+  let searchFor = [`%${req.parms.categoryname}%`];
+  const products = await Product.findAll({
+    where: {
+      $or: [{ brand_kor: { $or: searchFor } }, { brand: { $or: searchFor } }, { type: { $or: searchFor } }],
+    },
+    order: [['created_at', 'DESC']],
+  });
+  res.send(products);
+});
+
 router.get('/:id', async (req, res, next) => {
   const product = await Product.findOne({ where: { id: req.params.id } });
   res.send(product);
