@@ -33,7 +33,7 @@ const NewArrivalsSwiper = ({ newShoes }) => {
           className="flex justify-center"
         >
           {newShoes.map((s) => (
-            <SwiperSlide>
+            <SwiperSlide key={s.id}>
               <Item {...s} img={`${s.img}&w=216&h=216&q=80`} isNew={true} />
             </SwiperSlide>
           ))}

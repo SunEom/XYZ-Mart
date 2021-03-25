@@ -8,7 +8,7 @@ const ItemPresenter = ({ img, brand, serial, cost, isNew, id, brand_kor, sale })
           <img src={img} alt="" style={{ margin: 0 }} />
         </div>
         <div className="h-20 flex flex-col justify-center px-2 font-noto">
-          <div className="font-bold pt-2 pb-1 ">{brand_kor}</div>
+          <div className="font-bold pt-2 pb-1 text-lg">{brand_kor}</div>
           <div className="uppercase text-sm">{serial}</div>
         </div>
         <div className="h-auto flex flex-col justify-center px-2">

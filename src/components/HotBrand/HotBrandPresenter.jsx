@@ -39,8 +39,8 @@ const HotBrandPresenter = ({ bgImgList, nikeShoes, vansShoes, newBalanceShoes })
             <SwiperSlide className="w-full">
               <div className="flex justify-between w-full">
                 {nikeShoes.map((n) => (
-                  <div style={{ width: 285 }} className="flex justify-center mx-auto">
-                    <MItem id={n.id} img={`${n.img}&w=285&h=285&q=80`} brand={n.brand_kor} serial={n.serial} cost={n.cost} />
+                  <div style={{ width: 285 }} className="flex justify-center mx-auto" key={n.id}>
+                    <MItem {...n} img={`${n.img}&w=285&h=285&q=80`} />
                   </div>
                 ))}
               </div>
@@ -51,8 +51,8 @@ const HotBrandPresenter = ({ bgImgList, nikeShoes, vansShoes, newBalanceShoes })
               <div className="flex justify-between w-full">
                 <div className="flex justify-between w-full">
                   {vansShoes.map((n) => (
-                    <div style={{ width: 285 }} className="flex justify-center mx-auto">
-                      <MItem id={n.id} img={`${n.img}&w=285&h=285&q=80`} brand={n.brand_kor} serial={n.serial} cost={n.cost} />
+                    <div style={{ width: 285 }} className="flex justify-center mx-auto" key={n.id}>
+                      <MItem {...n} img={`${n.img}&w=285&h=285&q=80`} />
                     </div>
                   ))}
                 </div>
@@ -64,8 +64,8 @@ const HotBrandPresenter = ({ bgImgList, nikeShoes, vansShoes, newBalanceShoes })
               <div className="flex justify-between w-full">
                 <div className="flex justify-between w-full">
                   {newBalanceShoes.map((n) => (
-                    <div style={{ width: 285 }} className="flex justify-center mx-auto">
-                      <MItem id={n.id} img={`${n.img}&w=285&h=285&q=80`} brand={n.brand_kor} serial={n.serial} cost={n.cost} />
+                    <div style={{ width: 285 }} className="flex justify-center mx-auto" key={n.id}>
+                      <MItem {...n} img={`${n.img}&w=285&h=285&q=80`} />
                     </div>
                   ))}
                 </div>
