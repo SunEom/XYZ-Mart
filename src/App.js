@@ -9,6 +9,8 @@ import Join from './screens/Join';
 import Cart from './screens/Cart';
 import Search from './screens/Search';
 import MyPage from './screens/MyPage';
+import Gender from './screens/Gender';
+import Category from './screens/Category';
 import axios from 'axios';
 import { useEffect } from 'react';
 import store from './store';
@@ -43,6 +45,12 @@ function App() {
         </Route>
         <Route exact path="/search/:keyword">
           <Search />
+        </Route>
+        <Route exact path="/product/gender/:gender">
+          <Gender />
+        </Route>
+        <Route exact path="/product/category/:category">
+          <Category />
         </Route>
         <Route exact path="/product/:id">
           <Detail />

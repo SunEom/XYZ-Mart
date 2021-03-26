@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import SearchPresenter from './SearchPresenter';
+import CategoryPresenter from './CategoryPresenter';
 import axios from 'axios';
 import { useParams } from 'react-router';
-const SearchContainer = () => {
+const CategoryContainer = () => {
   const [result, setResult] = useState([]);
-  const keyword = useParams().keyword;
+  const category = useParams().category;
   const [loading, setLoading] = useState(true);
 
   const onChange = (e) => {
@@ -34,11 +34,11 @@ const SearchContainer = () => {
     { value: 'highcost', label: '높은가격순' },
   ];
 
-  const props = { result, keyword, sortOptions, onChange };
+  const props = { result, sortOptions, onChange, category };
   const getResult = async () => {
     setLoading(true);
     await axios
-      .get(`${process.env.REACT_APP_SERVER_PATH}/product/category/${keyword}`)
+      .get(`${process.env.REACT_APP_SERVER_PATH}/product/category/${category}`)
       .then(async (result) => {
         setResult(result.data);
         setLoading(false);
@@ -46,8 +46,8 @@ const SearchContainer = () => {
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => getResult(), [useParams().keyword]);
-  return <SearchPresenter {...props} />;
+  useEffect(() => getResult(), [useParams().category]);
+  return <CategoryPresenter {...props} />;
 };
 
-export default SearchContainer;
+export default CategoryContainer;
