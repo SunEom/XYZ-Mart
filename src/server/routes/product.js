@@ -14,13 +14,18 @@ router.get('/brand/:brandname', async (req, res, next) => {
   res.send(products);
 });
 
-router.get('/category/:categoryname', async (req, res, next) => {
-  let searchFor = [`%${req.params.categoryname}%`];
-
-  // basically turning the items into objects with "$iLike" as the key
-  searchFor = searchFor.map((item) => {
-    return { $iLike: item };
+router.get('/gender/:gender', async (req, res, next) => {
+  const products = await Product.findAll({
+    where: {
+      [Op.or]: [{ gender: 'all' }, { gender: `${req.params.gender}` }],
+    },
+    order: [['created_at', 'DESC']],
   });
+
+  res.send(products);
+});
+
+router.get('/category/:categoryname', async (req, res, next) => {
   const products = await Product.findAll({
     where: {
       [Op.or]: [
