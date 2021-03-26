@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import GenderPresenter from './GenderPresenter';
+import CategoryPresenter from './CategoryPresenter';
 import axios from 'axios';
 import { useParams } from 'react-router';
-const GenderContainer = () => {
+const CategoryContainer = () => {
   const [result, setResult] = useState([]);
-  const gender = useParams().gender;
+  const category = useParams().category;
   const [loading, setLoading] = useState(true);
 
   const onChange = (e) => {
@@ -34,11 +34,11 @@ const GenderContainer = () => {
     { value: 'highcost', label: '높은가격순' },
   ];
 
-  const props = { result, sortOptions, onChange, gender };
+  const props = { result, sortOptions, onChange, category };
   const getResult = async () => {
     setLoading(true);
     await axios
-      .get(`${process.env.REACT_APP_SERVER_PATH}/product/gender/${gender}`)
+      .get(`${process.env.REACT_APP_SERVER_PATH}/product/category/${category}`)
       .then(async (result) => {
         setResult(result.data);
         setLoading(false);
@@ -46,8 +46,8 @@ const GenderContainer = () => {
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => getResult(), [useParams().gender]);
-  return <GenderPresenter {...props} />;
+  useEffect(() => getResult(), [useParams().category]);
+  return <CategoryPresenter {...props} />;
 };
 
-export default GenderContainer;
+export default CategoryContainer;

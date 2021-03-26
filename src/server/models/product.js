@@ -63,6 +63,10 @@ module.exports = class Product extends Seqeulize.Model {
           type: Sequelize.STRING(45),
           allowNull: false,
         },
+        for_kids: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+        },
       },
       {
         sequelize,

@@ -2,11 +2,11 @@ import React from 'react';
 import Select from 'react-select';
 import MItem from '../../components/MItem';
 
-const GenderPresenter = ({ result, gender, sortOptions, onChange }) => {
+const CategoryPresenter = ({ result, sortOptions, onChange, category }) => {
   return (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div className="text-2xl font-mont font-bold mt-20 mb-5">
-        For <span className="uppercase">{gender}</span>
+        For <span className="uppercase">{category}</span>
       </div>
       <div className="border-b-2 border-solid border-black flex items-center justify-between" style={{ width: 1200 }}>
         <div>
@@ -36,4 +36,4 @@ const GenderPresenter = ({ result, gender, sortOptions, onChange }) => {
   );
 };
 
-export default GenderPresenter;
+export default CategoryPresenter;

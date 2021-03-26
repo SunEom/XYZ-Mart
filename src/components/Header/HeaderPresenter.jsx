@@ -105,7 +105,7 @@ const HeaderPresenter = ({ onSearch, user, onLogout }) => {
         style={{ height: 50, width: 1700 }}
       >
         <div className="flex items-center pr-20">
-          <Link to="/gender/" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
+          <Link to="#" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
             Brand
           </Link>
           <Link to="/product/gender/men" className="text-white px-5 text-base text-md font-medium uppercase">
@@ -114,31 +114,31 @@ const HeaderPresenter = ({ onSearch, user, onLogout }) => {
           <Link to="/product/gender/women" className="text-white px-5 text-base text-md font-medium uppercase">
             women
           </Link>
-          <Link to="/1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/product/category/kids" className="text-white px-5 text-base text-md font-medium uppercase">
             kids
           </Link>
-          <Link to="/1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/product/category/sale" className="text-white px-5 text-base text-md font-medium uppercase">
             sale
           </Link>
-          <Link to="/1" className="text-white px-5 text-base text-md font-bold uppercase">
+          <Link to="#" className="text-white px-5 text-base text-md font-bold uppercase">
             아트배송
           </Link>
         </div>
 
         <div className="flex items-center pl-20 ">
-          <Link to="1" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
+          <Link to="#" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
             #NUOVO
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/product/category/best" className="text-white px-5 text-base text-md font-medium uppercase">
             best
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
+          <Link to="#" className="text-white px-5 text-base text-md font-bold uppercase">
             기획전
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
+          <Link to="#" className="text-white px-5 text-base text-md font-bold uppercase">
             이벤트/쿠폰
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="#" className="text-white px-5 text-base text-md font-medium uppercase">
             hot deal
           </Link>
         </div>
