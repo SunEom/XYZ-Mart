@@ -54,6 +54,15 @@ module.exports = class Product extends Seqeulize.Model {
           allowNull: false,
           defaultValue: Seqeulize.NOW,
         },
+        order_count: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
+        gender: {
+          type: Sequelize.STRING(45),
+          allowNull: false,
+        },
       },
       {
         sequelize,
