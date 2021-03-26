@@ -105,22 +105,22 @@ const HeaderPresenter = ({ onSearch, user, onLogout }) => {
         style={{ height: 50, width: 1700 }}
       >
         <div className="flex items-center pr-20">
-          <Link to="1" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
+          <Link to="/gender/" className="text-mainYellow px-5 text-base md:text-md font-medium uppercase ">
             Brand
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/product/gender/men" className="text-white px-5 text-base text-md font-medium uppercase">
             men
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/product/gender/women" className="text-white px-5 text-base text-md font-medium uppercase">
             women
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/1" className="text-white px-5 text-base text-md font-medium uppercase">
             kids
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-medium uppercase">
+          <Link to="/1" className="text-white px-5 text-base text-md font-medium uppercase">
             sale
           </Link>
-          <Link to="1" className="text-white px-5 text-base text-md font-bold uppercase">
+          <Link to="/1" className="text-white px-5 text-base text-md font-bold uppercase">
             아트배송
           </Link>
         </div>
