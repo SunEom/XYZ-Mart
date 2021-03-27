@@ -5,7 +5,7 @@ const router = express.Router();
 const Product = require('../models/product');
 
 router.get('/new', async (req, res, next) => {
-  const products = await Product.findAll({ limit: 8, order: [['created_at', 'DESC']] });
+  const products = await Product.findAll({ where: { for_kids: false }, limit: 8, order: [['created_at', 'DESC']] });
   res.send(products);
 });
 
