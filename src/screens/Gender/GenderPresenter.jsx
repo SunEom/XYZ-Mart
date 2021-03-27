@@ -2,8 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import MItem from '../../components/MItem';
 
-const GenderPresenter = ({ result, gender, sortOptions, onChange }) => {
-  return (
+const GenderPresenter = ({ result, gender, sortOptions, onChange, loading }) => {
+  return loading ? null : (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div className="text-2xl font-mont font-bold mt-20 mb-5">
         For <span className="uppercase">{gender}</span>

@@ -34,7 +34,7 @@ const CategoryContainer = () => {
     { value: 'highcost', label: '높은가격순' },
   ];
 
-  const props = { result, sortOptions, onChange, category };
+  const props = { result, sortOptions, onChange, category, loading };
   const getResult = async () => {
     setLoading(true);
     await axios

@@ -34,7 +34,7 @@ const SearchContainer = () => {
     { value: 'highcost', label: '높은가격순' },
   ];
 
-  const props = { result, keyword, sortOptions, onChange };
+  const props = { result, keyword, sortOptions, onChange, loading };
   const getResult = async () => {
     setLoading(true);
     await axios
