@@ -34,7 +34,7 @@ const GenderContainer = () => {
     { value: 'highcost', label: '높은가격순' },
   ];
 
-  const props = { result, sortOptions, onChange, gender };
+  const props = { result, sortOptions, onChange, gender, loading };
   const getResult = async () => {
     setLoading(true);
     await axios

@@ -2,8 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import MItem from '../../components/MItem';
 
-const CategoryPresenter = ({ result, sortOptions, onChange, category }) => {
-  return (
+const CategoryPresenter = ({ result, sortOptions, onChange, category, loading }) => {
+  return loading ? null : (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div className="text-2xl font-mont font-bold mt-20 mb-5">
         For <span className="uppercase">{category}</span>

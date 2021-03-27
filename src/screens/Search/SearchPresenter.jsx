@@ -2,8 +2,8 @@ import React from 'react';
 import Select from 'react-select';
 import MItem from '../../components/MItem';
 
-const SearchPresenter = ({ result, keyword, sortOptions, onChange }) => {
-  return (
+const SearchPresenter = ({ result, keyword, sortOptions, onChange, loading }) => {
+  return loading ? null : (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div className="text-2xl font-mont font-bold mt-28">
         <span className="text-mainRed">{keyword}</span>
