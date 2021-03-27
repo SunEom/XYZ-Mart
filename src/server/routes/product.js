@@ -25,7 +25,11 @@ router.get('/category/best', async (req, res, next) => {
 });
 
 router.get('/brand/:brandname', async (req, res, next) => {
-  const products = await Product.findAll({ where: { brand: req.params.brandname }, limit: 4, order: [['created_at', 'DESC']] });
+  const products = await Product.findAll({
+    where: { [Op.and]: [{ brand: req.params.brandname }, { for_kids: false }] },
+    limit: 4,
+    order: [['created_at', 'DESC']],
+  });
   res.send(products);
 });
 
