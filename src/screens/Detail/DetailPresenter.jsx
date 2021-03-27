@@ -26,6 +26,11 @@ const DetailPresenter = ({ product, loading }) => {
       setItem(temp);
     }
   };
+
+  const type = {
+    sneakers: '스니커즈',
+    running: '러닝화',
+  };
   const onCancel = (e) => {
     let temp = [...item].filter((i) => i.size !== e.target.querySelector('input').value);
     let cost = 0;
@@ -49,7 +54,7 @@ const DetailPresenter = ({ product, loading }) => {
           <div className="mx-2 relative" style={{ top: 2 }}>
             <i className="fas fa-chevron-right"></i>
           </div>
-          <Link to="/shoes/sneakers">스니커즈</Link>
+          <Link to="/product/category/sneakers">{type[product.type]}</Link>
         </div>
         <div className="flex">
           <div>

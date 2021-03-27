@@ -11,12 +11,12 @@ const DetailContainer = () => {
       .get(`${process.env.REACT_APP_SERVER_PATH}/product/${params.id}`)
       .then((result) => {
         setProduct(result.data);
+        setLoading(false);
       })
       .catch((err) => console.error(err));
   };
   useEffect(() => {
     getProduct();
-    setLoading(false);
   }, []);
   return <DetailPresenter product={product} loading={loading} />;
 };
