@@ -80,5 +80,8 @@ module.exports = class Product extends Seqeulize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Product.belongsToMany(db.Order, { through: 'Order' });
+    db.Product.belongsToMany(db.Cart, { through: 'Cart' });
+  }
 };

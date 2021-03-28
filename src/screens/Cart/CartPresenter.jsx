@@ -1,8 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const CartPresenter = () => {
-  const itemNumber = 1;
-  const isLoggedin = false;
+const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems }) => {
+  const selectAll = (e) => {
+    if (e.target.checked) {
+      const checkboxs = document.getElementsByClassName('selected_item');
+      for (let checkbox of checkboxs) checkbox.checked = true;
+      setSelectedItems(cart);
+    } else {
+      const checkboxs = document.getElementsByClassName('selected_item');
+      for (let checkbox of checkboxs) checkbox.checked = false;
+      setSelectedItems([]);
+    }
+  };
   return (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div style={{ width: 1250 }} className="flex justify-between mt-14">
@@ -17,44 +26,17 @@ const CartPresenter = () => {
           <div>03. 주문완료</div>
         </div>
       </div>
-      {/* 로그인 안되어있을 때만 출력 */}
-      {isLoggedin ? null : (
-        <div style={{ width: 1250 }} className="flex justify-between mt-6 items-center">
-          <div className="flex">
-            <div
-              className="border-2 border-solid w-6 h-6 flex items-center justify-center mr-1 text-mainRed border-black font-bold"
-              style={{ borderRadius: 20 }}
-            >
-              !
-            </div>
-            <div className="font-bold">
-              통합 맴버십 회원으로 가입하시고 당일 사용 가능한 <span className="text-mainRed">5,000 포인트</span> 받으세요!
-            </div>
-          </div>
-          <div className="flex">
-            <div style={{ width: 140, height: 45 }} className="bg-black text-white mr-3 font-bold flex items-center justify-center">
-              <Link to="/login">로그인</Link>
-            </div>
-            <div
-              style={{ width: 140, height: 45 }}
-              className="bg-white text-black border border-solid border-black font-bold flex items-center justify-center"
-            >
-              <Link to="/join">회원가입</Link>
-            </div>
-          </div>
-        </div>
-      )}
-      <div style={{ width: 1250 }} className="flex flex-col justify-between mt-6 items-center">
+      <div style={{ width: 1250 }} className="flex flex-col justify-between mt-12 items-center">
         <div className="border-b-2 border-solid border-black w-full pb-5 font-bold font-mont" style={{ fontSize: 22 }}>
-          일반배송({itemNumber})
+          일반배송({cart?.length})
         </div>
-        {itemNumber ? (
-          <div style={{ height: 580 }} className="w-full">
+        {cart?.length !== 0 ? (
+          <div style={{ minHeight: 580 }} className="w-full">
             {/* 장바구니에 물건이 있는경우 */}
             <div>
               <div className=" border-b border-black border-solid flex justify-between items-center">
                 <div>
-                  <input type="checkbox" className="my-5 ml-2 mr-2" style={{ transform: 'scale(1.5)' }} />
+                  <input type="checkbox" className="my-5 ml-2 mr-2" style={{ transform: 'scale(1.5)' }} onChange={selectAll} />
                   <label htmlFor="">전체선택</label>
                 </div>
                 <div className="text-sm text-gray-400">
@@ -68,7 +50,7 @@ const CartPresenter = () => {
                 <div className="flex">
                   <div className="mr-2 pr-2 border-r border-solid border-gray-400">일반 배송 상품</div>
                   <div>
-                    <span className="text-mainRed">1</span> 개
+                    <span className="text-mainRed">{cart?.length}</span> 개
                   </div>
                   <div className="ml-2 pl-2 border-l border-solid border-gray-400">편의점 픽업 가능</div>
                 </div>
@@ -77,47 +59,58 @@ const CartPresenter = () => {
                 </div>
               </div>
               {/* 상품내용 */}
-              <div className="flex justify-between font-mont border-b border-solid border-gray-300">
-                <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
-                  <input type="checkbox" style={{ transform: 'scale(1.3)' }} className="mr-7" />
-                  <img
-                    style={{ width: 100 }}
-                    src="https://images.unsplash.com/photo-1542272605-15bd6a2bd4f4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=285&h=285&q=80"
-                    alt=""
-                  />
-                  <div className="flex flex-col ml-3">
-                    <div className="font-bold mb-1">VANS</div>
-                    <div className="text-gray-400 text-sm uppercase">sply-350</div>
-                    <div className="text-gray-400 text-sm uppercase">KR5</div>
-                    <div className="text-gray-400 text-sm ">255</div>
+              {cart?.map((item, index) => (
+                <div key={index} className="flex justify-between font-mont border-b border-solid border-gray-300">
+                  <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
+                    <input
+                      type="checkbox"
+                      style={{ transform: 'scale(1.3)' }}
+                      className="selected_item mr-7"
+                      onChange={(e) => {
+                        const checked = onChange(e);
+                        if (checked) setSelectedItems([...selectedItems, cart[index]]);
+                        else setSelectedItems(selectedItems.filter((i) => i !== cart[index]));
+                      }}
+                    />
+                    <img style={{ width: 100 }} src={`${item.product_info.img}&w=285&h=285&q=80`} alt="" />
+                    <div className="flex flex-col ml-3">
+                      <div className="font-bold mb-1">{item.product_info.brand}</div>
+                      <div className="text-gray-400 text-sm uppercase">{item.product_info.name}</div>
+                      <div className="text-gray-400 text-xs uppercase py-1">{item.product_info.stylecode}</div>
+                      <div className="text-gray-400 text-xs ">{item.size}</div>
+                    </div>
+                  </div>
+                  <div style={{ height: 140 }} className="ml-6 flex items-center text-sm">
+                    <div className="text-gray-500 mr-16">{item.quantity}</div>
+                    <div className="flex flex-col items-center mr-16">
+                      <div className="text-mainRed uppercase font-bold mb-1">
+                        {new Intl.NumberFormat().format(
+                          Math.floor(item.product_info.cost * item.quantity * (1 - item.product_info.sale)) / 100
+                        )}
+                        P
+                      </div>
+                      <div className="text-xs">통합맴버십 회원 가입시</div>
+                      <div className="text-xs">예상적립 포인트</div>
+                    </div>
+                    <div className="font-bold text-lg mr-16">
+                      <span>{new Intl.NumberFormat().format(item.product_info.cost * item.quantity * (1 - item.product_info.sale))}</span>원
+                    </div>
+                    <div className="mr-8 flex flex-col">
+                      <button style={{ width: 110, height: 40 }} className="bg-black text-white font-bold mb-2">
+                        바로구매
+                      </button>
+                      <button style={{ width: 110, height: 40 }} className="border-black border border-solid">
+                        <i className="far fa-trash-alt"></i> 삭제
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div style={{ height: 140 }} className="ml-6 flex items-center text-sm">
-                  <div className="text-gray-500 mr-16">1</div>
-                  <div className="flex flex-col items-center mr-16">
-                    <div className="text-mainRed uppercase font-bold mb-1">890P</div>
-                    <div className="text-xs">통합맴버십 회원 가입시</div>
-                    <div className="text-xs">예상적립 포인트</div>
-                  </div>
-                  <div className="font-bold text-lg mr-16">89,000원</div>
-                  <div className="mr-8 flex flex-col">
-                    <button style={{ width: 110, height: 40 }} className="bg-black text-white font-bold mb-2">
-                      바로구매
-                    </button>
-                    <button style={{ width: 110, height: 40 }} className="border-black border border-solid">
-                      <i className="far fa-trash-alt"></i> 삭제
-                    </button>
-                  </div>
-                </div>
-              </div>
+              ))}
               <div className="flex justify-between items-center font-mont border-b-2 border-solid">
                 <div>
                   <button style={{ width: 110, height: 40 }} className="border-black border border-solid mr-2 my-5 text-sm font-bold">
                     선택 삭제
                   </button>
-                </div>
-                <div className="text-xs font-bold text-gray-400">
-                  {isLoggedin ? null : '비로그인 상태에서 장바구니에 담긴 상품은 저장되지 않습니다.'}
                 </div>
               </div>
               <div
@@ -127,7 +120,16 @@ const CartPresenter = () => {
                 <div className="w-1/3 flex justify-between px-8 border-r border-gray-400 border-solid h-full items-center relative">
                   <div>주문금액</div>
                   <div className="text-sm">
-                    <span className="text-xl">89,000</span>원
+                    <span className="text-xl">
+                      {new Intl.NumberFormat().format(
+                        selectedItems?.reduce(
+                          (accumulator, currentValue) =>
+                            accumulator + currentValue.product_info.cost * currentValue.quantity * (1 - currentValue.product_info.sale),
+                          0
+                        )
+                      )}
+                    </span>
+                    원
                   </div>
                   <div
                     style={{ width: 30, height: 30, borderRadius: 15 }}
@@ -139,7 +141,7 @@ const CartPresenter = () => {
                 <div className="w-1/3 flex justify-between px-8 items-center relative">
                   <div>총 할인금액</div>
                   <div className="text-sm">
-                    <span className="text-xl">89,000</span>원
+                    <span className="text-xl">0</span>원
                   </div>
                   <div
                     style={{ width: 30, height: 30, borderRadius: 15 }}
@@ -151,7 +153,16 @@ const CartPresenter = () => {
                 <div className="w-1/3 flex justify-between px-8 border-l border-gray-400 border-solid h-full items-center">
                   <div>주문금액</div>
                   <div className="text-sm text-mainRed">
-                    <span className="text-xl">89,000</span>원
+                    <span className="text-xl">
+                      {new Intl.NumberFormat().format(
+                        selectedItems?.reduce(
+                          (accumulator, currentValue) =>
+                            accumulator + currentValue.product_info.cost * currentValue.quantity * (1 - currentValue.product_info.sale),
+                          0
+                        )
+                      )}
+                    </span>
+                    원
                   </div>
                 </div>
               </div>
@@ -163,7 +174,16 @@ const CartPresenter = () => {
                   <div className="flex items-center justify-between text-gray-500">
                     <div>주문금액</div>
                     <div>
-                      <span>89,000</span>원
+                      <span>
+                        {new Intl.NumberFormat().format(
+                          selectedItems?.reduce(
+                            (accumulator, currentValue) =>
+                              accumulator + currentValue.product_info.cost * currentValue.quantity * (1 - currentValue.product_info.sale),
+                            0
+                          )
+                        )}
+                      </span>
+                      원
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-gray-500">
@@ -178,7 +198,16 @@ const CartPresenter = () => {
                   <div className="flex w-full items-center justify-between text-gray-500">
                     <div>예상적립 포인트</div>
                     <div>
-                      <span>890</span>P
+                      <span>
+                        {new Intl.NumberFormat().format(
+                          selectedItems?.reduce(
+                            (accumulator, currentValue) =>
+                              accumulator + currentValue.product_info.cost * currentValue.quantity * (1 - currentValue.product_info.sale),
+                            0
+                          ) / 100
+                        )}
+                      </span>
+                      P
                     </div>
                   </div>
                   <div className="text-gray-400 text-xs">- 통합맴버십 회원 가입시 적립예정 포인트</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const HeaderPresenter = ({ onSearch, user, onLogout }) => {
+const HeaderPresenter = ({ onSearch, user, onLogout, cart }) => {
   return (
     <header className="font-alfa w-full">
       {/* Top Part */}
@@ -92,9 +92,11 @@ const HeaderPresenter = ({ onSearch, user, onLogout }) => {
           </Link>
           <Link to="/cart" className="focus:outline-none">
             <i className="fas fa-shopping-bag fa-2x"></i>
-            <div className="h-4 w-4 bg-mainRed text-xs flex justify-center items-center text-white font-mont font-bold absolute -right-1 bottom-0">
-              1
-            </div>
+            {cart ? (
+              <div className="h-4 w-4 bg-mainRed text-xs flex justify-center items-center text-white font-mont font-bold absolute -right-1 bottom-0">
+                {cart.length}
+              </div>
+            ) : null}
           </Link>
         </div>
       </div>

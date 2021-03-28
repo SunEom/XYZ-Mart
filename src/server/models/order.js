@@ -16,6 +16,10 @@ module.exports = class Order extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        quantity: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         created_at: {
           type: Sequelize.DATE,
           allowNull: false,
@@ -34,5 +38,7 @@ module.exports = class Order extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Order.belongsToMany(db.Product, { through: 'Order' });
+  }
 };

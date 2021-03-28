@@ -17,9 +17,15 @@ import store from './store';
 
 function App() {
   const loginCheck = async () => {
-    await axios
-      .get(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { withCredentials: true })
-      .then(async (result) => await store.dispatch({ type: 'LOGIN', user: result.data.dataValues }));
+    await axios.get(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { withCredentials: true }).then(async (result) => {
+      await store.dispatch({ type: 'LOGIN', user: result.data.dataValues });
+      axios
+        .get(`${process.env.REACT_APP_SERVER_PATH}/product/cart/${result.data.dataValues.id}`, { withCredentials: true })
+        .then(async (cart) => {
+          await store.dispatch({ type: 'CART_UPDATED', cart: cart.data });
+        })
+        .catch((error) => console.error(error));
+    });
   };
   useEffect(() => {
     loginCheck();
