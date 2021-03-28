@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddedItem from '../../components/Detail/AddedItem';
+import axios from 'axios';
+import store from '../../store';
 
-const DetailPresenter = ({ product, loading }) => {
+const DetailPresenter = ({ product, loading, history }) => {
   const [totalCost, setTotalCost] = useState(0);
   const [item, setItem] = useState([]);
   const onClick = (e) => {
@@ -24,6 +26,32 @@ const DetailPresenter = ({ product, loading }) => {
       let temp = [...item];
       temp.push({ size: e.target.innerHTML, number: 1 });
       setItem(temp);
+    }
+  };
+
+  const AddtoCart = async (e) => {
+    e.preventDefault();
+    const user = store.getState().user;
+    if (user) {
+      //로그인이 되어있을 시,
+      await axios
+        .post(
+          `${process.env.REACT_APP_SERVER_PATH}/product/cart`,
+          { user: user.id, product: item, product_id: product.id },
+          { withCredentials: true }
+        )
+        .then((result) => {
+          store.dispatch({ type: 'CART_UPDATED', cart: result.data });
+          const answer = window.confirm('상품이 장바구니에 담겼습니다. 지금 확인하시겠습니까? ');
+          if (answer) {
+            history.push({ pathname: '/cart' });
+            window.scrollTo(0, 0);
+          }
+        })
+        .catch((err) => console.error(err));
+    } else {
+      //로그인이 되어있지 않을 시
+      history.push({ pathname: '/login' });
     }
   };
 
@@ -223,8 +251,8 @@ const DetailPresenter = ({ product, loading }) => {
                   </div>
                 </div>
               </div>
-              {item.map((i) => (
-                <AddedItem size={i.size} number={i.number} cost={product.cost} sale={product.sale} onCancel={onCancel} />
+              {item.map((i, index) => (
+                <AddedItem key={index} size={i.size} number={i.number} cost={product.cost} sale={product.sale} onCancel={onCancel} />
               ))}
               <div style={{ height: 95 }} className="flex items-center justify-between pr-4">
                 <div style={{ width: 200 }} className="ml-4 text-sm font-bold">
@@ -237,16 +265,26 @@ const DetailPresenter = ({ product, loading }) => {
                   <div>원</div>
                 </div>
               </div>
-              <div style={{ height: 95 }} className="flex items-center justify-between pr-4">
-                <button
-                  style={{ width: 580 }}
-                  className="ml-4 text-lg font-bold bg-gray-500 h-16 flex items-center justify-center text-white hover:bg-black transition-all duration-500"
-                >
-                  장바구니
-                </button>
-                <button style={{ width: 580 }} className="ml-4 text-lg font-bold bg-black h-16 flex items-center justify-center text-white">
-                  바로구매
-                </button>
+
+              <div className="flex items-center justify-between pr-4">
+                <form onSubmit={AddtoCart}>
+                  <button
+                    style={{ width: 300 }}
+                    type="submit"
+                    className="ml-4 text-lg font-bold bg-gray-500 h-16 flex items-center justify-center text-white hover:bg-black transition-all duration-500"
+                  >
+                    장바구니
+                  </button>
+                </form>
+                <form>
+                  <button
+                    style={{ width: 300 }}
+                    type="submit"
+                    className="ml-4 text-lg font-bold bg-black h-16 flex items-center justify-center text-white"
+                  >
+                    바로구매
+                  </button>
+                </form>
               </div>
             </div>
           </div>

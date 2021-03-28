@@ -6,7 +6,9 @@ import { useHistory } from 'react-router';
 
 const HeaderContainer = () => {
   const [user, setUser] = useState(store.getState().user);
+  const [cart, setCart] = useState(store.getState().cart);
   const sUser = () => setUser(store.getState().user);
+  const sCart = () => setCart(store.getState().cart);
   const history = useHistory();
 
   const onLogout = async (e) => {
@@ -28,10 +30,12 @@ const HeaderContainer = () => {
 
   useEffect(() => {
     sUser();
+    sCart();
   }, []);
 
   store.subscribe(sUser);
+  store.subscribe(sCart);
 
-  return <HeaderPresenter user={user} onLogout={onLogout} onSearch={onSearch} />;
+  return <HeaderPresenter user={user} onLogout={onLogout} onSearch={onSearch} cart={cart} />;
 };
 export default HeaderContainer;

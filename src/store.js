@@ -20,4 +20,8 @@ export default createStore((state, action) => {
   if (action.type === 'USER_UPDATED') {
     return { ...state, user: action.user };
   }
+
+  if (action.type === 'CART_UPDATED') {
+    return { ...state, cart: action.cart };
+  }
 }, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

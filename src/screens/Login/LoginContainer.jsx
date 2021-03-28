@@ -28,8 +28,15 @@ const LoginContainer = () => {
     await axios
       .post(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { id, password }, { withCredentials: true })
       .then(async (result) => {
+        const user = result.data;
         await store.dispatch({ type: 'LOGIN', user: { ...result.data } });
-        history.push({ pathname: '/' });
+        axios
+          .get(`${process.env.REACT_APP_SERVER_PATH}/product/cart/${user.id}`, { withCredentials: true })
+          .then(async (cart) => {
+            await store.dispatch({ type: 'CART_UPDATED', cart: cart.data });
+            history.push({ pathname: '/' });
+          })
+          .catch((error) => console.error(error));
       })
       .catch((err) => console.error(err.response));
   };

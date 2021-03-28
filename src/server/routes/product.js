@@ -3,6 +3,8 @@ const Op = require('sequelize').Op;
 const router = express.Router();
 
 const Product = require('../models/product');
+const Order = require('../models/order');
+const Cart = require('../models/cart');
 
 router.get('/new', async (req, res, next) => {
   const products = await Product.findAll({ where: { for_kids: false }, limit: 8, order: [['created_at', 'DESC']] });
@@ -57,6 +59,43 @@ router.get('/category/:categoryname', async (req, res, next) => {
   });
 
   res.send(products);
+});
+
+router.post('/cart', async (req, res, next) => {
+  const user = req.body.user;
+  const product = req.body.product;
+  const product_id = req.body.product_id;
+
+  for (let item of product) {
+    await Cart.create({
+      user,
+      product: product_id,
+      size: item.size,
+      quantity: item.number,
+    });
+  }
+
+  const result = await Cart.findAll({
+    where: { user },
+  });
+  for (let i = 0; i < result.length; i++) {
+    const p = await Product.findOne({ where: { id: result[i].product } });
+    console.log(p);
+    result[i] = { ...result[i].dataValues, product_info: p.dataValues };
+  }
+  res.send(result);
+});
+
+router.get('/cart/:id', async (req, res, next) => {
+  const result = await Cart.findAll({
+    where: { user: req.params.id },
+  });
+  for (let i = 0; i < result.length; i++) {
+    const p = await Product.findOne({ where: { id: result[i].product } });
+    console.log(p);
+    result[i] = { ...result[i].dataValues, product_info: p.dataValues };
+  }
+  res.send(result);
 });
 
 router.get('/:id', async (req, res, next) => {
