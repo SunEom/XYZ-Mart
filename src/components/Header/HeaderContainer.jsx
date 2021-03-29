@@ -17,6 +17,8 @@ const HeaderContainer = () => {
       .get(`${process.env.REACT_APP_SERVER_PATH}/auth/logout`, { withCredentials: true })
       .then((result) => {
         store.dispatch({ type: 'LOGOUT' });
+        store.dispatch({ type: 'CART_UPDATED', cart: null });
+        history.push({ pathname: '/' });
       })
       .catch((err) => console.error(err));
   };
