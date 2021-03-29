@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems }) => {
+
+const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, requestDelete, requestDeleteSelected }) => {
   const selectAll = (e) => {
     if (e.target.checked) {
-      const checkboxs = document.getElementsByClassName('selected_item');
-      for (let checkbox of checkboxs) checkbox.checked = true;
       setSelectedItems(cart);
     } else {
-      const checkboxs = document.getElementsByClassName('selected_item');
-      for (let checkbox of checkboxs) checkbox.checked = false;
       setSelectedItems([]);
     }
   };
@@ -64,6 +61,7 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems }) => {
                   <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
                     <input
                       type="checkbox"
+                      checked={selectedItems.includes(item)}
                       style={{ transform: 'scale(1.3)' }}
                       className="selected_item mr-7"
                       onChange={(e) => {
@@ -72,9 +70,13 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems }) => {
                         else setSelectedItems(selectedItems.filter((i) => i !== cart[index]));
                       }}
                     />
-                    <img style={{ width: 100 }} src={`${item.product_info.img}&w=285&h=285&q=80`} alt="" />
+                    <Link to={`/product/${item.product_info.id}`}>
+                      <img style={{ width: 100 }} src={`${item.product_info?.img}&w=285&h=285&q=80`} alt="" />
+                    </Link>
                     <div className="flex flex-col ml-3">
-                      <div className="font-bold mb-1">{item.product_info.brand}</div>
+                      <Link to={`/search/${item.product_info.brand.toLowerCase()}`}>
+                        <div className="font-bold mb-1">{item.product_info.brand}</div>
+                      </Link>
                       <div className="text-gray-400 text-sm uppercase">{item.product_info.name}</div>
                       <div className="text-gray-400 text-xs uppercase py-1">{item.product_info.stylecode}</div>
                       <div className="text-gray-400 text-xs ">{item.size}</div>
@@ -96,21 +98,33 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems }) => {
                       <span>{new Intl.NumberFormat().format(item.product_info.cost * item.quantity * (1 - item.product_info.sale))}</span>원
                     </div>
                     <div className="mr-8 flex flex-col">
-                      <button style={{ width: 110, height: 40 }} className="bg-black text-white font-bold mb-2">
-                        바로구매
-                      </button>
-                      <button style={{ width: 110, height: 40 }} className="border-black border border-solid">
-                        <i className="far fa-trash-alt"></i> 삭제
-                      </button>
+                      <form onSubmit={requestDelete}>
+                        <input type="hidden" value={item.id} name="id" />
+                        <button type="submit" style={{ width: 110, height: 40 }} className="bg-black text-white font-bold mb-2">
+                          바로구매
+                        </button>
+                      </form>
+                      <form onSubmit={requestDelete}>
+                        <input type="hidden" value={item.id} name="id" />
+                        <button type="submit" style={{ width: 110, height: 40 }} className="border-black border border-solid">
+                          <i className="far fa-trash-alt"></i> 삭제
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
               ))}
               <div className="flex justify-between items-center font-mont border-b-2 border-solid">
                 <div>
-                  <button style={{ width: 110, height: 40 }} className="border-black border border-solid mr-2 my-5 text-sm font-bold">
-                    선택 삭제
-                  </button>
+                  <form onSubmit={requestDeleteSelected}>
+                    <button
+                      type="submit"
+                      style={{ width: 110, height: 40 }}
+                      className="border-black border border-solid mr-2 my-5 text-sm font-bold"
+                    >
+                      선택 삭제
+                    </button>
+                  </form>
                 </div>
               </div>
               <div
