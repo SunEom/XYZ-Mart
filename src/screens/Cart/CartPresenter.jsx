@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, requestDelete, requestDeleteSelected }) => {
   const selectAll = (e) => {
     if (e.target.checked) {
@@ -68,9 +70,13 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, reques
                         else setSelectedItems(selectedItems.filter((i) => i !== cart[index]));
                       }}
                     />
-                    <img style={{ width: 100 }} src={`${item.product_info?.img}&w=285&h=285&q=80`} alt="" />
+                    <Link to={`/product/${item.product_info.id}`}>
+                      <img style={{ width: 100 }} src={`${item.product_info?.img}&w=285&h=285&q=80`} alt="" />
+                    </Link>
                     <div className="flex flex-col ml-3">
-                      <div className="font-bold mb-1">{item.product_info.brand}</div>
+                      <Link to={`/search/${item.product_info.brand.toLowerCase()}`}>
+                        <div className="font-bold mb-1">{item.product_info.brand}</div>
+                      </Link>
                       <div className="text-gray-400 text-sm uppercase">{item.product_info.name}</div>
                       <div className="text-gray-400 text-xs uppercase py-1">{item.product_info.stylecode}</div>
                       <div className="text-gray-400 text-xs ">{item.size}</div>
