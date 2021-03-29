@@ -32,6 +32,7 @@ const DetailPresenter = ({ product, loading, history }) => {
   const AddtoCart = async (e) => {
     e.preventDefault();
     const user = store.getState().user;
+    if (item.length === 0) return alert('사이즈를 선택해주세요');
     if (user) {
       //로그인이 되어있을 시,
       await axios
