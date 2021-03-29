@@ -98,6 +98,19 @@ router.get('/cart/:id', async (req, res, next) => {
   res.send(result);
 });
 
+router.delete('/cart/item/:id', async (req, res, next) => {
+  const id = req.params.id;
+  await Cart.destroy({ where: { id, user: req.user.id } });
+
+  const result = await Cart.findAll({ where: { user: req.user.id } });
+  for (let i = 0; i < result.length; i++) {
+    const p = await Product.findOne({ where: { id: result[i].product } });
+    console.log(p);
+    result[i] = { ...result[i].dataValues, product_info: p.dataValues };
+  }
+  res.send(result);
+});
+
 router.get('/:id', async (req, res, next) => {
   const product = await Product.findOne({ where: { id: req.params.id } });
   res.send(product);
