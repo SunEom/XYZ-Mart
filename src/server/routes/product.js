@@ -89,6 +89,7 @@ router.post('/cart', async (req, res, next) => {
 router.get('/cart/:id', async (req, res, next) => {
   const result = await Cart.findAll({
     where: { user: req.params.id },
+    order: [['created_at', 'DESC']],
   });
   for (let i = 0; i < result.length; i++) {
     const p = await Product.findOne({ where: { id: result[i].product } });
@@ -102,7 +103,7 @@ router.delete('/cart/item/:id', async (req, res, next) => {
   const id = req.params.id;
   await Cart.destroy({ where: { id, user: req.user.id } });
 
-  const result = await Cart.findAll({ where: { user: req.user.id } });
+  const result = await Cart.findAll({ where: { user: req.user.id }, order: [['created_at', 'DESC']] });
   for (let i = 0; i < result.length; i++) {
     const p = await Product.findOne({ where: { id: result[i].product } });
     console.log(p);
@@ -114,7 +115,7 @@ router.delete('/cart/item/:id', async (req, res, next) => {
 router.post('/cart/items', async (req, res, next) => {
   const items = req.body.items;
   for (let item of items) await Cart.destroy({ where: { id: item.id, user: req.user.id } });
-  const result = await Cart.findAll({ where: { user: req.user.id } });
+  const result = await Cart.findAll({ where: { user: req.user.id }, order: [['created_at', 'DESC']] });
   for (let i = 0; i < result.length; i++) {
     const p = await Product.findOne({ where: { id: result[i].product } });
     console.log(p);
