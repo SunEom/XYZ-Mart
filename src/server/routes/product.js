@@ -61,6 +61,8 @@ router.get('/category/:categoryname', async (req, res, next) => {
   res.send(products);
 });
 
+// About CART
+
 router.post('/cart', async (req, res, next) => {
   const user = req.body.user;
   const product = req.body.product;
@@ -116,6 +118,34 @@ router.post('/cart/items', async (req, res, next) => {
   const items = req.body.items;
   for (let item of items) await Cart.destroy({ where: { id: item.id, user: req.user.id } });
   const result = await Cart.findAll({ where: { user: req.user.id }, order: [['created_at', 'DESC']] });
+  for (let i = 0; i < result.length; i++) {
+    const p = await Product.findOne({ where: { id: result[i].product } });
+    console.log(p);
+    result[i] = { ...result[i].dataValues, product_info: p.dataValues };
+  }
+  res.send(result);
+});
+
+// About ORDER
+
+router.post('/order', async (req, res, next) => {
+  const { items, product } = req.body;
+  for (let item of items) {
+    await Order.create({
+      user: req.user.id,
+      product,
+      size: item.size,
+      quantity: item.number,
+    });
+  }
+  res.send('Success!');
+});
+
+router.get('/order', async (req, res, next) => {
+  if (!req.user) {
+    return res.status(400).send('Not login');
+  }
+  const result = await Order.findAll({ where: { user: req.user.id } });
   for (let i = 0; i < result.length; i++) {
     const p = await Product.findOne({ where: { id: result[i].product } });
     console.log(p);
