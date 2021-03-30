@@ -56,6 +56,22 @@ const DetailPresenter = ({ product, loading, history }) => {
     }
   };
 
+  const OrderItem = async (e) => {
+    e.preventDefault();
+    if (item.length === 0) return alert('사이즈를 선택해주세요');
+    const answer = window.confirm('정말로 구매하시겠습니까 ?');
+    if (answer) {
+      await axios
+        .post(
+          `${process.env.REACT_APP_SERVER_PATH}/product/order`,
+          { items: item, product: product.id, point: (product.cost * (1 - product.sale)) / 100 },
+          { withCredentials: true }
+        )
+        .then((result) => store.dispatch({ type: 'USER_UPDATED', user: result.data }))
+        .catch((err) => console.error(err));
+    }
+  };
+
   const type = {
     sneakers: '스니커즈',
     running: '러닝화',
@@ -277,7 +293,7 @@ const DetailPresenter = ({ product, loading, history }) => {
                     장바구니
                   </button>
                 </form>
-                <form>
+                <form onSubmit={OrderItem}>
                   <button
                     style={{ width: 300 }}
                     type="submit"
