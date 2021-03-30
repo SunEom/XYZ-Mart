@@ -2,8 +2,26 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const MyPagePresenter = ({ user }) => {
+const MyPagePresenter = ({ user, myOrder }) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const changeDate = (e) => {
+    let temp = new Date(endDate);
+    temp.setMonth(temp.getMonth() - e.target.value);
+    setStartDate(temp);
+  };
+
+  const dateFiltering = () => {
+    let temp = myOrder.filter(
+      (a) =>
+        new Date(a.created_at.slice(0, 10)) >= new Date(`${startDate.toISOString().split('T')[0]} 00:00:00`) &&
+        new Date(a.created_at.slice(0, 10)) <= new Date(`${endDate.toISOString().split('T')[0]} 23:59:59`)
+    );
+
+    return temp;
+  };
+
   return (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div style={{ width: 1250 }} className="text-3xl font-bold font-mont mt-16">
@@ -141,16 +159,36 @@ const MyPagePresenter = ({ user }) => {
             >
               <div className="font-bold mr-14">온라인 쇼핑몰 구매내역</div>
               <div>
-                <button className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2" style={{ height: 40 }}>
+                <button
+                  value="1"
+                  onClick={changeDate}
+                  className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2"
+                  style={{ height: 40 }}
+                >
                   1개월
                 </button>
-                <button className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2" style={{ height: 40 }}>
+                <button
+                  className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2"
+                  value="3"
+                  onClick={changeDate}
+                  style={{ height: 40 }}
+                >
                   3개월
                 </button>
-                <button className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2" style={{ height: 40 }}>
+                <button
+                  className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2"
+                  value="6"
+                  onClick={changeDate}
+                  style={{ height: 40 }}
+                >
                   6개월
                 </button>
-                <button className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2" style={{ height: 40 }}>
+                <button
+                  className="bg-white border border-solid border-gray-500 px-4 py-1 ml-2"
+                  value="12"
+                  onClick={changeDate}
+                  style={{ height: 40 }}
+                >
                   1년
                 </button>
               </div>
@@ -162,8 +200,8 @@ const MyPagePresenter = ({ user }) => {
               />
               <span className="ml-2 -mr-1">~</span>
               <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
                 dateFormat="yyyy/MM/dd"
                 className="border border-solid border-black ml-3 py-2 pl-3 w-28 "
               />
@@ -171,33 +209,40 @@ const MyPagePresenter = ({ user }) => {
                 조회
               </button>
             </div>
-            <div className="flex justify-between font-mont border-b border-solid border-gray-300">
-              <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
-                <img
-                  style={{ width: 100 }}
-                  src="https://images.unsplash.com/photo-1542272605-15bd6a2bd4f4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=285&h=285&q=80"
-                  alt=""
-                />
-                <div className="flex flex-col ml-3">
-                  <div className="font-bold mb-1">VANS</div>
-                  <div className="text-gray-400 text-sm uppercase">sply-350</div>
-                  <div className="text-gray-400 text-sm uppercase">KR5</div>
-                  <div className="text-gray-400 text-sm ">255</div>
-                </div>
-              </div>
-              <div style={{ height: 140 }} className="ml-6 flex items-center text-sm">
-                <div className="text-gray-500 mr-16">1</div>
-                <div className="flex flex-col items-center mr-16">
-                  <div className="text-mainRed uppercase font-bold mb-1">890P</div>
-                  <div className="text-xs">예상적립 포인트</div>
-                </div>
-                <div className="font-bold text-lg mr-16">89,000원</div>
-                <div className="mr-8 flex flex-col items-center">
-                  <div className="text-xs">주문일자</div>
-                  <div className="text-xs">2021.03.21</div>
-                </div>
-              </div>
-            </div>
+            {myOrder.length === 0
+              ? null
+              : dateFiltering().map((order) => (
+                  <div className="flex justify-between font-mont border-b border-solid border-gray-300">
+                    <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
+                      <img style={{ width: 100 }} src={`${order.product_info.img}&w=285&h=285&q=80`} alt="" />
+                      <div className="flex flex-col ml-3">
+                        <div className="font-bold mb-1">{order.product_info.brand}</div>
+                        <div className="text-gray-400 text-sm uppercase">{order.product_info.serial}</div>
+                        <div className="text-gray-400 text-sm uppercase">{order.product_info.stylecode.slice(0, 3)}</div>
+                        <div className="text-gray-400 text-sm ">{order.size}</div>
+                      </div>
+                    </div>
+                    <div style={{ height: 140 }} className="ml-6 flex items-center text-sm">
+                      <div className="text-gray-500 mr-16">{order.quantity}</div>
+                      <div className="flex flex-col items-center mr-16">
+                        <div className="text-mainRed uppercase font-bold mb-1">
+                          {new Intl.NumberFormat().format(
+                            Math.floor(order.product_info.cost * order.quantity * (1 - order.product_info.sale)) / 100
+                          )}
+                          P
+                        </div>
+                        <div className="text-xs">예상적립 포인트</div>
+                      </div>
+                      <div className="font-bold text-lg mr-16">
+                        {new Intl.NumberFormat().format(order.product_info.cost * order.quantity * (1 - order.product_info.sale))}원
+                      </div>
+                      <div className="mr-8 flex flex-col items-center">
+                        <div className="text-xs">주문일자</div>
+                        <div className="text-xs">{order.created_at.slice(0, 10)}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
