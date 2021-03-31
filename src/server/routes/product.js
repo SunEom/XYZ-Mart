@@ -137,7 +137,7 @@ router.post('/order', async (req, res, next) => {
       user: req.user.id,
       product,
       size: item.size,
-      quantity: item.number,
+      quantity: item.number || item.quantity,
     });
 
   await User.update({ point: exUser.point + point * items.length }, { where: { id: req.user.id } });
