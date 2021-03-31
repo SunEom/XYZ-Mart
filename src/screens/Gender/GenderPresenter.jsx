@@ -18,9 +18,9 @@ const GenderPresenter = ({ result, gender, sortOptions, onChange, loading }) => 
           </div>
         </div>
       </div>
-      <div style={{ width: 1200 }} className="flex justify-between flex-wrap">
+      <div style={{ width: 1250 }} className="flex flex-wrap relative left-6">
         {result.map((r) => (
-          <div style={{ width: 285, height: 470 }} className="mt-5 relative" key={r.id}>
+          <div style={{ width: 285, height: 470 }} className="mt-5 relative mr-5" key={r.id}>
             <MItem {...r} img={`${r.img}&w=285&h=285&q=80`} />
             <div
               className="w-10 h-10 flex flex-col items-center justify-center text-mainRed bg-mainYellow font-alfa absolute right-2"
