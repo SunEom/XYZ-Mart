@@ -131,7 +131,7 @@ const DetailPresenter = ({ product, loading, history }) => {
               <div className="flex">
                 <div className="bg-mainRed px-2 text-white font-bold text-base mr-2 flex items-center h-7">XYZ-MART</div>
                 <div className="font-bold border-b border-solid relative -top-2">
-                  <Link to={`/shoes/brand/${product.brand?.toLowerCase()}`} className="relative top-2">
+                  <Link to={`/product/category/${product.brand.toLowerCase()}`} className="relative top-2">
                     {product.brand} <i className="fas fa-chevron-right"></i>
                   </Link>
                 </div>
