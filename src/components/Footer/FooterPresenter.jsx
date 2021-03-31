@@ -22,7 +22,7 @@ const FooterPresenter = () => {
       <div className="w-full flex justify-center items-center pt-10">
         <div style={{ width: 700 }}>
           <div className="text-mainRed text-2xl font-alfa pt-7 pb-4">XYZ-MART</div>
-          <div>해당 사이트는 ABC-MART 클론코딩을 위한 사이트입니다.</div>
+          <div>해당 사이트는 ABC-MART 클론코딩만을 위한 사이트입니다.</div>
           <div className="text-xs pt-2">https://suneom.github.io/XYZ-Mart</div>
         </div>
         <div style={{ width: 500 }} className="flex relative top-8">
