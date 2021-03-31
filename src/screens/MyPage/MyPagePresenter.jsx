@@ -73,7 +73,7 @@ const MyPagePresenter = ({ user, myOrder }) => {
                     <div>나의 포인트</div>
                   </div>
                   <div className="text-right mr-5">
-                    <span className="text-xl font-bold font-mont">{user?.point}</span>
+                    <span className="text-xl font-bold font-mont">{new Intl.NumberFormat().format(user?.point)}</span>
                     <span className="font-bold">P</span>
                   </div>
                 </div>

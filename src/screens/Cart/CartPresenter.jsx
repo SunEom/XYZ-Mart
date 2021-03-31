@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, requestDelete, requestDeleteSelected }) => {
+const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, requestDelete, requestDeleteSelected, orderItem }) => {
   const selectAll = (e) => {
     if (e.target.checked) {
       setSelectedItems(cart);
@@ -9,6 +9,7 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, reques
       setSelectedItems([]);
     }
   };
+
   return (
     <div style={{ minWidth: 1700 }} className="flex items-center justify-center font-noto flex-col">
       <div style={{ width: 1250 }} className="flex justify-between mt-14">
@@ -98,7 +99,7 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, reques
                       <span>{new Intl.NumberFormat().format(item.product_info.cost * item.quantity * (1 - item.product_info.sale))}</span>원
                     </div>
                     <div className="mr-8 flex flex-col">
-                      <form onSubmit={requestDelete}>
+                      <form onSubmit={orderItem} value="Hello">
                         <input type="hidden" value={item.id} name="id" />
                         <button type="submit" style={{ width: 110, height: 40 }} className="bg-black text-white font-bold mb-2">
                           바로구매
@@ -229,24 +230,31 @@ const CartPresenter = ({ cart, onChange, selectedItems, setSelectedItems, reques
               </div>
             </div>
             <div className="flex justify-center font-mont my-10">
-              <button
+              <Link
+                to="/"
                 style={{ width: 200, height: 60 }}
                 className="border border-solid border-black font-bold flex justify-center items-center hover:bg-gray-200 transition"
               >
                 계속 쇼핑하기
-              </button>
-              <button
-                style={{ width: 230, height: 60 }}
-                className="border border-solid border-gray-500 mx-5 font-bold text-white bg-gray-500 flex justify-center items-center hover:bg-black transition"
-              >
-                일반배송 선택상품 주문하기
-              </button>
-              <button
-                style={{ width: 230, height: 60 }}
-                className="border border-solid border-black bg-black font-bold flex justify-center items-center text-white"
-              >
-                일반배송 전체상품 주문하기
-              </button>
+              </Link>
+              <form onSubmit={orderItem}>
+                <button
+                  type="submit"
+                  style={{ width: 230, height: 60 }}
+                  className="border border-solid border-gray-500 mx-5 font-bold text-white bg-gray-500 flex justify-center items-center hover:bg-black transition"
+                >
+                  일반배송 선택상품 주문하기
+                </button>
+              </form>
+              <form onSubmit={orderItem}>
+                <button
+                  type="submit"
+                  style={{ width: 230, height: 60 }}
+                  className="border border-solid border-black bg-black font-bold flex justify-center items-center text-white"
+                >
+                  일반배송 전체상품 주문하기
+                </button>
+              </form>
             </div>
           </div>
         ) : (
