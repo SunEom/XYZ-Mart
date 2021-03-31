@@ -23,6 +23,7 @@ const FooterPresenter = () => {
         <div style={{ width: 700 }}>
           <div className="text-mainRed text-2xl font-alfa pt-7 pb-4">XYZ-MART</div>
           <div>해당 사이트는 ABC-MART 클론코딩만을 위한 사이트입니다.</div>
+          <div className="font-bold">영리의 목적이 아닌 학습의 용도로만 이용됩니다.</div>
           <div className="text-xs pt-2">https://suneom.github.io/XYZ-Mart</div>
         </div>
         <div style={{ width: 500 }} className="flex relative top-8">
