@@ -1,6 +1,7 @@
 const express = require('express');
 const Op = require('sequelize').Op;
 const router = express.Router();
+const sequelize = require('sequelize');
 
 const User = require('../models/user');
 const Product = require('../models/product');
@@ -132,13 +133,16 @@ router.post('/cart/items', async (req, res, next) => {
 router.post('/order', async (req, res, next) => {
   const { items, product, point } = req.body;
   const exUser = await User.findOne({ where: { id: req.user.id } });
-  for (let item of items)
+  for (let item of items) {
     await Order.create({
       user: req.user.id,
       product,
       size: item.size,
       quantity: item.number || item.quantity,
     });
+
+    await Product.update({ order_count: sequelize.literal('order_count + 1') }, { where: { id: product } });
+  }
 
   await User.update({ point: exUser.point + point * items.length }, { where: { id: req.user.id } });
   const user = await User.findOne({ where: { id: req.user.id } });
