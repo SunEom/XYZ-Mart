@@ -67,7 +67,14 @@ const DetailPresenter = ({ product, loading, history }) => {
           { items: item, product: product.id, point: (product.cost * (1 - product.sale)) / 100 },
           { withCredentials: true }
         )
-        .then((result) => store.dispatch({ type: 'USER_UPDATED', user: result.data }))
+        .then((result) => {
+          store.dispatch({ type: 'USER_UPDATED', user: result.data });
+          const answer = window.confirm('구매 완료하였습니다! 지금 확인하시겠습니까?');
+          if (answer) {
+            history.push({ pathname: '/mypage' });
+            window.scrollTo(0, 0);
+          }
+        })
         .catch((err) => console.error(err));
     }
   };
