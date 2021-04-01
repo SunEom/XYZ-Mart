@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const MyPagePresenter = ({ user, myOrder }) => {
+const MyPagePresenter = ({ user, myOrder, preparing, delivering, delivered }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -100,21 +100,21 @@ const MyPagePresenter = ({ user, myOrder }) => {
                 </div>
               </div>
               <div className="w-1/5 flex flex-col items-center relative">
-                <div className="text-3xl font-mont font-bold">0</div>
+                <div className="text-3xl font-mont font-bold">{preparing}</div>
                 <div className="text-center text-gray-500 mt-2">상품준비중</div>
                 <div className="absolute -right-2 top-4 text-2xl text-gray-300">
                   <i className="fas fa-chevron-right"></i>
                 </div>
               </div>
               <div className="w-1/5 flex flex-col items-center relative">
-                <div className="text-3xl font-mont font-bold">0</div>
+                <div className="text-3xl font-mont font-bold">{delivering}</div>
                 <div className="text-center text-gray-500 mt-2">배송중/픽업준비완료</div>
                 <div className="absolute -right-2 top-4 text-2xl text-gray-300">
                   <i className="fas fa-chevron-right"></i>
                 </div>
               </div>
               <div className="w-1/5 flex flex-col items-center relative">
-                <div className="text-3xl font-mont font-bold">0</div>
+                <div className="text-3xl font-mont font-bold">{delivered}</div>
                 <div className="text-center text-gray-500 mt-2">배송/수령완료</div>
                 <div className="absolute"></div>
               </div>
