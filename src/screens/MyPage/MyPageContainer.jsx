@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const MyPageContainer = () => {
   const history = useHistory();
-  const user = store.getState().user;
+  const [user, setUser] = useState(store.getState().user);
   const [myOrder, setMyOrder] = useState([]);
   const getMyOrder = async () => {
     await axios
@@ -15,11 +15,10 @@ const MyPageContainer = () => {
       .catch((err) => console.log(err));
   };
 
-  if (!user) {
-    history.push({ pathname: '/login' });
-  }
-
   useEffect(() => {
+    if (!user) {
+      history.push({ pathname: '/login' });
+    }
     getMyOrder();
   }, []);
   return <MyPagePresenter user={user} myOrder={myOrder} />;
