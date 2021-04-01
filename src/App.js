@@ -12,10 +12,11 @@ import MyPage from './screens/MyPage';
 import Gender from './screens/Gender';
 import Category from './screens/Category';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import store from './store';
 
 function App() {
+  const [isLoginChecked, setIsLoginChecked] = useState(false);
   const loginCheck = async () => {
     await axios.get(`${process.env.REACT_APP_SERVER_PATH}/auth/login`, { withCredentials: true }).then(async (result) => {
       await store.dispatch({ type: 'LOGIN', user: result.data.dataValues });
@@ -23,8 +24,9 @@ function App() {
         .get(`${process.env.REACT_APP_SERVER_PATH}/product/cart/${result.data.dataValues.id}`, { withCredentials: true })
         .then(async (cart) => {
           await store.dispatch({ type: 'CART_UPDATED', cart: cart.data });
+          setIsLoginChecked(true);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => setIsLoginChecked(true));
     });
   };
   useEffect(() => {
@@ -32,37 +34,39 @@ function App() {
   }, []);
   return (
     <div className="App mb-40">
-      <HashRouter>
-        <Header />
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/join">
-          <Join />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
-        <Route exact path="/mypage">
-          <MyPage />
-        </Route>
-        <Route exact path="/search/:keyword">
-          <Search />
-        </Route>
-        <Route exact path="/product/gender/:gender">
-          <Gender />
-        </Route>
-        <Route exact path="/product/category/:category">
-          <Category />
-        </Route>
-        <Route exact path="/product/:id">
-          <Detail />
-        </Route>
-        <Footer />
-      </HashRouter>
+      {isLoginChecked ? (
+        <HashRouter>
+          <Header />
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/join">
+            <Join />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          <Route exact path="/mypage">
+            <MyPage />
+          </Route>
+          <Route exact path="/search/:keyword">
+            <Search />
+          </Route>
+          <Route exact path="/product/gender/:gender">
+            <Gender />
+          </Route>
+          <Route exact path="/product/category/:category">
+            <Category />
+          </Route>
+          <Route exact path="/product/:id">
+            <Detail />
+          </Route>
+          <Footer />
+        </HashRouter>
+      ) : null}
     </div>
   );
 }
