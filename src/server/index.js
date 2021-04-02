@@ -24,7 +24,7 @@ sequelize
     console.error(err);
   });
 
-app.set('port', process.env.SERVER_PORT);
+app.set('port', process.env.PORT || 8000);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
