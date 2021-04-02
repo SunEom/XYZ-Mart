@@ -24,11 +24,12 @@ sequelize
     console.error(err);
   });
 
+app.set('trust proxy', 1);
 app.set('port', process.env.PORT || 8000);
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: true, credentials: true, exposedHeaders: 'Set-Cookie' }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
@@ -37,7 +38,8 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     cookie: {
       httpOnly: true,
-      secure: false,
+      sameSite: 'none',
+      secure: true,
     },
   })
 );
