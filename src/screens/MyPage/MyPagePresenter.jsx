@@ -54,7 +54,7 @@ const MyPagePresenter = ({ user, myOrder, preparing, delivering, delivered }) =>
               <div className="flex">
                 <div style={{ width: 180, height: 100 }} className="border-l border-solid">
                   <div className="ml-7 mb-5">
-                    <i class="fas fa-ticket-alt text-xl"></i>
+                    <i className="fas fa-ticket-alt text-xl"></i>
                     <div>나의 쿠폰</div>
                   </div>
                   <div className="text-right mr-5">
@@ -212,7 +212,7 @@ const MyPagePresenter = ({ user, myOrder, preparing, delivering, delivered }) =>
             {myOrder.length === 0
               ? null
               : dateFiltering().map((order) => (
-                  <div className="flex justify-between font-mont border-b border-solid border-gray-300">
+                  <div key={order.id} className="flex justify-between font-mont border-b border-solid border-gray-300">
                     <div style={{ width: 350, height: 140 }} className="ml-6 flex items-center">
                       <img style={{ width: 100 }} src={`${order.product_info.img}&w=285&h=285&q=80`} alt="" />
                       <div className="flex flex-col ml-3">
