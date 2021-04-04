@@ -216,7 +216,7 @@ const DetailPresenter = ({ product, loading, history }) => {
                 </div>
                 <div className="flex text-sm uppercase flex-col ">
                   <div className="text-base mb-3">
-                    <input type="radio" id="nomal" name="drone" value="nomal" checked className="mr-2" />
+                    <input type="radio" id="nomal" name="drone" value="nomal" defaultChecked className="mr-2" />
                     <label htmlFor="nomal">일반배송 (무료배송)</label>
                   </div>
 
