@@ -107,6 +107,16 @@ const JoinContainer = () => {
       const pnumFormat = `${pnum.slice(0, 3)}-${pnum.slice(3, 7)}-${pnum.slice(7)}`;
       setPnum(pnumFormat);
     }
+    if (name === '') {
+      return window.alert('이름을 입력해주세요');
+    }
+    if (id === '') {
+      return window.alert('아이디를 입력해주세요');
+    }
+    if (password === '') {
+      return window.alert('비밀번호를 입력해주세요');
+    }
+
     JoinProcess();
   };
   return <JoinPresenter onChange={onChange} onSubmit={onSubmit} props={props} />;
